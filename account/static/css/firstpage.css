@@ -1,3 +1,4 @@
+{%load staticfiles %}
 html, body {
   margin: 0;
   padding: 0;
@@ -10,7 +11,7 @@ html, body {
 }
 
 .jumbotron {
-  background: url(http://s3.amazonaws.com/codecademy-content/projects/broadway/bg.png) no-repeat center center;
+  background: #a9a9a9 no-repeat center center;
   background-size: cover;
   height: 800px;
 }
