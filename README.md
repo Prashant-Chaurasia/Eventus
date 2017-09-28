@@ -43,10 +43,11 @@ cashback to you which you can use to buy or book tickets further.
   ```
 ### Contributing Guidelines
 * Adhere to universal coding standard and practices .
+* Don't commit or push directly to this branch always use Pull Request.
 * Only one commit is allowed per pull request .
 * Your PR should reference the issue pertaining to which you have made changes .
 * Use good commit messages to clearly state what has been done .
-
+* No one would merge the pull requests except me . In time to come I may ask someone to do this work.
   
   
 
