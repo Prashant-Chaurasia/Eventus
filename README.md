@@ -17,18 +17,16 @@ cashback to you which you can use to buy or book tickets further.
   ```
   Create database eventus ;
   Create user eventus with password 'eventus';
-  Grant all on eventus to eventus;
-  Alter role with login;
+  Grant all on database eventus to eventus;
+  Alter role eventus with login;
   ```
 * Exit to root console
 
 ##### Cloning Project
 
-* Clone the project but work only on development branch .
+* Fork this project and clone to local system.Now through terminal go to the directory where you have downloaded.
   ```
-  git clone https://github.com/Prashant-Chaurasia/Eventus.git
   cd Eventus
-  git checkout development
   ```
 * Install all the requirements 
   ```
