@@ -17,9 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include,url
 from django.contrib.auth import views
-from account.forms import LoginForm
+from mywebsite.forms import LoginForm
+
+from mywebsite import views as core_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'', include('account.urls')),
+    url(r'^accounts/login/$', views.login, name='login'),
+    url(r'^accounts/logout/$', views.logout, {'template_name': 'mywebsite/logout.html'}, name='logout'),
+    url(r'', include('mywebsite.urls', namespace='mywebsite')),
+    url(r'^account_activation_sent/$', core_views.account_activation_sent, name='account_activation_sent'),
+    url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
+        core_views.activate, name='activate'),
 ]

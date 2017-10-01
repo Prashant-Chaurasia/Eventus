@@ -33,13 +33,13 @@ ALLOWED_HOSTS = [keys.ALLOWED_HOST]
 # Application definition
 
 INSTALLED_APPS = [
-    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'mywebsite'
 
 ]
 
@@ -126,6 +126,19 @@ USE_TZ = True
 
 
 LOGIN_REDIRECT_URL = '/'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+AUTHENTICATION_BACKENDS = (
+    # 'social_core.backends.github.GithubOAuth2',
+    # 'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.facebook.FacebookOAuth2',
+
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
 
 
 # Static files (CSS, JavaScript, Images)
@@ -137,3 +150,5 @@ if DEBUG == False:
     STATIC_ROOT = os.path.join((BASE_DIR), 'static')
 else:
     STATIC_URL = '/static/'
+
+
