@@ -25,6 +25,10 @@ def home(request):
 def firstpage(request):
     return render(request, 'mywebsite/firstPage.html', {})
 
+def view_profile(request):
+    args = {'user': request.user}
+    return render(request, 'mywebsite/profile.html', args)
+
 def signup(request):
     if request.method == 'POST':
         form = SignUpForm(request.POST)
@@ -49,6 +53,9 @@ def account_activation_sent(request):
     return render(request, 'mywebsite/account_activation_sent.html')
 
 
+email_address = 'deployment334@gmail.com'
+email_password = 'Dipadi@god5'
+
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -67,8 +74,7 @@ def activate(request, uidb64, token):
         return render(request, 'mywebsite/profile.html', {})
 
 
-email_address = 'deployment334@gmail.com'
-email_password = 'Dipadi@god5'
+
 
 def send_verification_mail(email, msg):
     print("send verificaion mail")
