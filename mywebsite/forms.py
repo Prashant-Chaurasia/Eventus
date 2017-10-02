@@ -32,3 +32,22 @@ class SignUpForm(UserCreationForm):
             raise forms.ValidationError("User with this username already exists")
 
         return self.cleaned_data.get('username')
+
+class SignUpFormForCompany(UserCreationForm):
+    Official_phone_num = forms.CharField(max_length=15)
+
+    class Meta:
+        model = User
+        fields = ('username', 'email', 'password1', 'password2', 'Official_phone_num')
+
+    def clean_email(self):
+        if User.objects.filter(email=self.cleaned_data.get('email', None)).count() > 0:
+            raise forms.ValidationError("User with this email already exists")
+
+        return self.cleaned_data.get('email')
+
+    def clean_username(self):
+        if User.objects.filter(username=self.cleaned_data.get('username', None)).count() > 0:
+            raise forms.ValidationError("User with this username already exists")
+
+        return self.cleaned_data.get('username')

@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate,login
 from .forms import LoginForm
 from django.contrib.auth.decorators import login_required
-from mywebsite.forms import SignUpForm
+from mywebsite.forms import SignUpForm,SignUpFormForCompany
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -49,6 +49,29 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'mywebsite/signup.html', {'form': form})
 
+def signupForCompany(request):
+    if request.method == 'POST':
+        form = SignUpFormForCompany(request.POST)
+        print(form)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.is_active = False
+            user.save()
+            current_site = get_current_site(request)
+            subject = 'Activate Your InterAdicr Account'
+            message = render_to_string('mywebsite/account_activation_emailForCompany.html',
+                                       {'user': user, 'domain': current_site.domain,
+                                        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                                        'token': account_activation_token.make_token(user), })
+            user.email_user(subject, message)
+            send_verification_mail(user.email, message)
+            return redirect('account_activation_sent')
+
+    else:
+        form = SignUpFormForCompany()
+    return render(request, 'mywebsite/signupForCompany.html', {'form': form})
+
+
 def account_activation_sent(request):
     return render(request, 'mywebsite/account_activation_sent.html')
 
@@ -72,6 +95,22 @@ def activate(request, uidb64, token):
         return render(request, 'mywebsite/firstPage.html', {})
     else:
         return render(request, 'mywebsite/profile.html', {})
+def activateForCompany(request, uidb64, token):
+    try:
+        uid = force_text(urlsafe_base64_decode(uidb64))
+        user = User.objects.get(pk=uid)
+    except (TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and account_activation_token.check_token(user, token):
+        user.is_active = True
+        user.profile.email_confirmed = True
+        user.save()
+        login(request, user)
+        user.is_active = True
+        return render(request, 'mywebsite/firstPage.html', {})
+    else:
+        return render(request, 'mywebsite/firstPage.html', {})
 
 
 
