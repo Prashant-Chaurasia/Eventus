@@ -33,7 +33,7 @@ class SignUpForm(UserCreationForm):
 
         return self.cleaned_data.get('username')
 
-class SignUpFormForCompany(UserCreationForm):
+class SignUpFormForOrganizer(UserCreationForm):
     Official_phone_num = forms.CharField(max_length=15)
 
     class Meta:
