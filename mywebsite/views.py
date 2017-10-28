@@ -49,7 +49,6 @@ def signup(request):
         form = SignUpForm()
     return render(request, 'mywebsite/signup.html', {'form': form})
 
-
 def signupForCompany(request):
     if request.method == 'POST':
         form = SignUpFormForCompany(request.POST)
@@ -80,7 +79,6 @@ def account_activation_sent(request):
 email_address = 'deployment334@gmail.com'
 email_password = 'Dipadi@god5'
 
-
 def activate(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -97,8 +95,6 @@ def activate(request, uidb64, token):
         return render(request, 'mywebsite/firstPage.html', {})
     else:
         return render(request, 'mywebsite/profile.html', {})
-
-
 def activateForCompany(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -115,6 +111,8 @@ def activateForCompany(request, uidb64, token):
         return render(request, 'mywebsite/firstPage.html', {})
     else:
         return render(request, 'mywebsite/firstPage.html', {})
+
+
 
 
 def send_verification_mail(email, msg):
