@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include,url
 from django.contrib.auth import views
-from mywebsite.forms import LoginForm
+
 
 from mywebsite import views as core_views
 
