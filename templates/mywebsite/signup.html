@@ -16,13 +16,71 @@
     <div class=" form">
 
         <ul class="tab-group">
-            <li class="tab active"><a href="#signup">Sign Up</a></li>
-            <li class="tab "><a href="#login">Log In</a></li>
+            <li class="tab active"><a href="#signup">Student</a></li>
+            <li class="tab "><a href="#signup1">Organizer</a></li>
         </ul>
 
         <div class="tab-content">
             <div id="signup">
-                <h1>Sign Up for Free</h1>
+                <h1>Sign Up for Student</h1>
+
+                 <form method="post" action="{% url 'mywebsite:signup' %}">
+                    {% csrf_token %}
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                First Name<span class="req">*</span>
+                            </label>
+                            {{ form.first_name }}
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Last Name<span class="req">*</span>
+                            </label>
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Repeat the Password<span class="req">*</span>
+                        </label>
+                        {{ form.password2 }}
+                    </div>
+
+                    <button type="submit" class="button button-block"/>
+                    Get Started</button>
+
+                </form>
+                {% for error in form.errors %}
+                        <p style="color: red">{{ error }}</p>
+                {% endfor %}
+
+            </div>
+
+            <div id="signup1">
+                <h1>Sign Up for Organizer</h1>
 
                  <form method="post" action="{% url 'mywebsite:signup' %}">
                     {% csrf_token %}
@@ -76,35 +134,6 @@
                 {% for error in form.errors %}
                         <p style="color: red">{{ error }}</p>
                 {% endfor %}
-
-            </div>
-
-            <div id="login">
-
-                <h1>Welcome Back!</h1>
-
-                <form action="/" method="post">
-                    {% csrf_token %}
-                    <div class="field-wrap">
-                        <label>
-                            Username<span class="req">*</span>
-                        </label>
-                        {{ forms.username }}
-                    </div>
-
-                    <div class="field-wrap">
-                        <label>
-                            Password<span class="req">*</span>
-                        </label>
-                        {{ forms.password1 }}
-                    </div>
-
-                    <p class="forgot"><a href="#">Forgot Password?</a></p>
-
-                    <button class="button button-block"/>
-                    Log In</button>
-
-                </form>
 
             </div>
 

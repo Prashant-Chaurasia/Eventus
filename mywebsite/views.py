@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login
 
 from django.contrib.auth.decorators import login_required
-from mywebsite.forms import SignUpForm,SignUpFormForOrganizer
+from mywebsite.forms import SignUpForm, SignUpFormForOrganizer
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -16,6 +16,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.models import User
 import smtplib
 
+
 # Create your views here.
 
 def home(request):
@@ -25,15 +26,17 @@ def home(request):
 def firstpage(request):
     return render(request, 'mywebsite/firstPage.html', {})
 
+
 def view_profile(request):
     args = {'user': request.user}
     return render(request, 'mywebsite/profile.html', args)
 
+
 def signup(request):
     if request.method == 'POST':
-        forms = SignUpForm(request.POST)
-        if forms.is_valid():
-            user = forms.save(commit=False)
+        form = SignUpForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
@@ -46,8 +49,9 @@ def signup(request):
             send_verification_mail(user.email, message)
             return redirect('account_activation_sent')
     else:
-        forms = SignUpForm()
-    return render(request, 'mywebsite/signup.html', {'forms': forms})
+        form = SignUpForm()
+    return render(request, 'mywebsite/signup.html', {'form': form})
+
 
 def signupForOrganizer(request):
     if request.method == 'POST':
@@ -69,7 +73,7 @@ def signupForOrganizer(request):
 
     else:
         form = SignUpFormForOrganizer()
-    return render(request, 'mywebsite/signupForCompany.html', {'form': form})
+    return render(request, 'mywebsite/signupForOrganizer.html', {'form': form})
 
 
 def account_activation_sent(request):
@@ -78,6 +82,7 @@ def account_activation_sent(request):
 
 email_address = 'deployment334@gmail.com'
 email_password = 'Dipadi@god5'
+
 
 def activate(request, uidb64, token):
     try:
@@ -95,6 +100,8 @@ def activate(request, uidb64, token):
         return render(request, 'mywebsite/firstPage.html', {})
     else:
         return render(request, 'mywebsite/profile.html', {})
+
+
 def activateForOrganizer(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
@@ -113,8 +120,6 @@ def activateForOrganizer(request, uidb64, token):
         return render(request, 'mywebsite/firstPage.html', {})
 
 
-
-
 def send_verification_mail(email, msg):
     print("send verificaion mail")
     try:
@@ -127,8 +132,3 @@ def send_verification_mail(email, msg):
         print('successfully sent the mail')
     except:
         print("failed to send mail")
-
-
-
-
-
