@@ -1,9 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate,login
-from .forms import LoginForm
+
 from django.contrib.auth.decorators import login_required
-from mywebsite.forms import SignUpForm,SignUpFormForCompany
+from mywebsite.forms import SignUpForm,SignUpFormForOrganizer
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.sites.shortcuts import get_current_site
@@ -31,9 +31,9 @@ def view_profile(request):
 
 def signup(request):
     if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
+        forms = SignUpForm(request.POST)
+        if forms.is_valid():
+            user = forms.save(commit=False)
             user.is_active = False
             user.save()
             current_site = get_current_site(request)
@@ -46,12 +46,12 @@ def signup(request):
             send_verification_mail(user.email, message)
             return redirect('account_activation_sent')
     else:
-        form = SignUpForm()
-    return render(request, 'mywebsite/signup.html', {'form': form})
+        forms = SignUpForm()
+    return render(request, 'mywebsite/signup.html', {'forms': forms})
 
-def signupForCompany(request):
+def signupForOrganizer(request):
     if request.method == 'POST':
-        form = SignUpFormForCompany(request.POST)
+        form = SignUpFormForOrganizer(request.POST)
         print(form)
         if form.is_valid():
             user = form.save(commit=False)
@@ -68,7 +68,7 @@ def signupForCompany(request):
             return redirect('account_activation_sent')
 
     else:
-        form = SignUpFormForCompany()
+        form = SignUpFormForOrganizer()
     return render(request, 'mywebsite/signupForCompany.html', {'form': form})
 
 
@@ -95,7 +95,7 @@ def activate(request, uidb64, token):
         return render(request, 'mywebsite/firstPage.html', {})
     else:
         return render(request, 'mywebsite/profile.html', {})
-def activateForCompany(request, uidb64, token):
+def activateForOrganizer(request, uidb64, token):
     try:
         uid = force_text(urlsafe_base64_decode(uidb64))
         user = User.objects.get(pk=uid)

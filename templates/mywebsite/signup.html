@@ -1,28 +1,126 @@
-{% extends 'mywebsite/base.html' %}
 {% load staticfiles %}
+<html>
+<head>
+    <title>Sign up or login</title>
+    <link rel="stylesheet" href="{% static 'css/lbg.css' %}" type="text/css">
 
-{% block content %}
-    <div class="container-fluid " id="bg">
-        <div class="row">
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
 
-            <h2>Sign up</h2>
-            <form method="post">
-                {% csrf_token %}
-                {% for field in form %}
-                    <p>
-                        {{ field.label_tag }}<br>
-                        {{ field }}
-                        {% if field.help_text %}
-                            <small style="color: grey">{{ field.help_text }}</small>
-                        {% endif %}
-                        {% for error in field.errors %}
-                            <p style="color: red">{{ error }}</p>
-                        {% endfor %}
-                    </p>
+
+</head>
+<body>
+
+
+<div class="clouds">
+
+    <div class=" form">
+
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Sign Up</a></li>
+            <li class="tab "><a href="#login">Log In</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="signup">
+                <h1>Sign Up for Free</h1>
+
+                 <form method="post" action="{% url 'mywebsite:signup' %}">
+                    {% csrf_token %}
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        {{ forms.username }}
+                    </div>
+
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <label>
+                                First Name<span class="req">*</span>
+                            </label>
+                            {{ forms.first_name }}
+                        </div>
+
+                        <div class="field-wrap">
+                            <label>
+                                Last Name<span class="req">*</span>
+                            </label>
+                            {{ forms.last_name }}
+                        </div>
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        {{ forms.email }}
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        {{ forms.password1 }}
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Repeat the Password<span class="req">*</span>
+                        </label>
+                        {{ forms.password2 }}
+                    </div>
+
+                    <button type="submit" class="button button-block"/>
+                    Get Started</button>
+
+                </form>
+                {% for error in form.errors %}
+                        <p style="color: red">{{ error }}</p>
                 {% endfor %}
-                <button type="submit">Sign up</button>
-            </form>
-        </div>
-    </div>
 
-{% endblock %}
+            </div>
+
+            <div id="login">
+
+                <h1>Welcome Back!</h1>
+
+                <form action="/" method="post">
+                    {% csrf_token %}
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        {{ forms.username }}
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        {{ forms.password1 }}
+                    </div>
+
+                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                    <button class="button button-block"/>
+                    Log In</button>
+
+                </form>
+
+            </div>
+
+        </div>
+        <!-- tab-content -->
+
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/lbg.js' %}">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
+

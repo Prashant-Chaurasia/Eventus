@@ -51,10 +51,7 @@ form .form-group {
 }
 
 .cityImage {
-    width: 160px;
-    height: 115px;
-    padding: 0px;
-    margin: 0px;
+
     position: absolute;
     z-index: +1;
 }

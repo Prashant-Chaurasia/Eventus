@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.conf.urls import include,url
 from django.contrib.auth import views
-from mywebsite.forms import LoginForm
+
 
 from mywebsite import views as core_views
 
@@ -30,7 +30,7 @@ urlpatterns = [
     url(r'^activate/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
         core_views.activate, name='activate'),
     url(r'^activateForCompany/(?P<uidb64>[0-9A-Za-z_\-]+)/(?P<token>[0-9A-Za-z]{1,13}-[0-9A-Za-z]{1,20})/$',
-        core_views.activateForCompany, name='activateForCompany'),
+        core_views.activateForOrganizer, name='activateForCompany'),
 
 
     url(r'', include('mywebsite.urls', namespace='mywebsite')),
