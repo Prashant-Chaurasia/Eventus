@@ -1,0 +1,48 @@
+{% extends 'mywebsite/base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <link href="{% static "css/eventListStyle.css" %}" rel="stylesheet">
+    <div class="container-fluid " id="courses-container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1>
+                    Event'17
+                </h1>
+                <a href="{% url 'mywebsite:events_new' %}">
+                    <button class="btn btn-primary">
+                        Add New Event
+                    </button>
+                </a>
+                <br>
+                <br>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <br>
+        <div class="row">
+            {% for event in events %}
+                <div class="col-md-3">
+                    <div class="thumbnail" id="thumbanailText">
+                        <a href="{% url 'mywebsite:events_detail' pk=event.pk %}">
+                            <img src="{{ event.Event_Image.url }}" class="ideaImage" alt="Event Image">
+                            <h3>
+                                {{ event.Event_Name }}
+                            </h3>
+                            <h4>
+                                {{ event.Venue_Of_Event }}
+                            </h4>
+
+
+                        </a>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    </div>
+
+{% endblock %}
+
