@@ -1,8 +1,3 @@
-
-
-
-
-
 var scrollSpeed = 10;
     
     // set the default position

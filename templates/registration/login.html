@@ -1,46 +1,100 @@
-{% extends "mywebsite/base.html" %}
 {% load staticfiles %}
+<html>
+<head>
+    <title>Student and organizer</title>
+    <link rel="stylesheet" href="{% static 'css/lbg.css' %}" type="text/css">
 
-{% block content %}
-    <div class="container-fluid " id="bg">
-        <div class="row loginRow">
-            <div class="col-md-8">
+    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
 
 
-                {% if form.errors %}
-                    <p>Your username and password didn't match. Please try again.</p>
-                {% endif %}
+</head>
+<body>
+
+
+<div class="clouds">
+
+    <div class=" form">
+
+        <ul class="tab-group">
+            <li class="tab active"><a href="#login">Student</a></li>
+            <li class="tab "><a href="#login1">Organizer</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="login">
+
+                <h1>Student</h1>
 
                 <form method="post" action="{% url 'login' %}">
                     {% csrf_token %}
-                    <table>
-                        <tr>
-                            <td>{{ form.username.label_tag }}</td>
-                            <td>{{ form.username }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ form.password.label_tag }}</td>
-                            <td>{{ form.password }}</td>
-                        </tr>
-                    </table>
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        {{ form.username }}
+                    </div>
 
-                    <input type="submit" value="login"/>
-                    <input type="hidden" name="next" value="{{ next }}"/>
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        {{ form.password }}
+                    </div>
+
+                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                    <button type="submit" class="button button-block"/>
+                    Log In
+                    </button>
+                    <input type="hidden" name="next" value="{{ next }}"/><br>
 
                 </form>
 
-                    <a href="#">
-                        <button class="btn btn-primary">Forget Password?</button>
+            </div>
+            <div id="login1">
 
-                    </a>
+                <h1>Student</h1>
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        {{ form.username }}
+                    </div>
 
+                    <div class="field-wrap">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        {{ form.password }}
+                    </div>
+
+                    <p class="forgot"><a href="#">Forgot Password?</a></p>
+
+                    <button type="submit" class="button button-block"/>
+                    Log In
+                    </button>
+                    <input type="hidden" name="next" value="{{ next }}"/><br>
+
+                </form>
 
             </div>
 
+
         </div>
+        <!-- tab-content -->
 
     </div>
+</div>
 
 
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="{% static 'js/lbg.js' %}">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
 
-{% endblock %}
