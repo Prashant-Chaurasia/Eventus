@@ -143,8 +143,8 @@ def events_list(request):
     return render(request, 'mywebsite/event_list.html', {'events': events})
 
 def events_detail(request, pk):
-    events = get_object_or_404(Event, pk=pk)
-    return render(request, 'mywebsite/event_detail.html', {'events': events})
+    event = get_object_or_404(Event, pk=pk)
+    return render(request, 'mywebsite/event_detail.html', {'event': event})
 
 @login_required()
 def events_new(request):
@@ -152,11 +152,11 @@ def events_new(request):
         print(request.FILES)
         form = EventForm(request.POST, request.FILES)
         if form.is_valid():
-            events = form.save(commit=False)
+            event = form.save(commit=False)
             print("Post: ", form)
-            events.author = request.user
-            events.save()
-            return redirect('mywebsite:events_detail', pk=events.pk)
+            event.author = request.user
+            event.save()
+            return redirect('mywebsite:events_detail', pk=event.pk)
     else:
         form = EventForm()
     return render(request, 'mywebsite/event_edit.html', {'form': form})
