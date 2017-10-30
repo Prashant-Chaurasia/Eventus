@@ -1,4 +1,6 @@
+{% extends 'mywebsite/baseForLoginNdSignup.html' %}
 {% load staticfiles %}
+{% block content %}
 <html>
 <head>
     <title>Sign up or login</title>
@@ -88,7 +90,7 @@
                         <label>
                             Username<span class="req">*</span>
                         </label>
-                        {{ forms.username }}
+                        {{ form.username }}
                     </div>
 
                     <div class="top-row">
@@ -96,14 +98,14 @@
                             <label>
                                 First Name<span class="req">*</span>
                             </label>
-                            {{ forms.first_name }}
+                            {{ form.first_name }}
                         </div>
 
                         <div class="field-wrap">
                             <label>
                                 Last Name<span class="req">*</span>
                             </label>
-                            {{ forms.last_name }}
+                            {{ form.last_name }}
                         </div>
                     </div>
 
@@ -111,20 +113,20 @@
                         <label>
                             Email Address<span class="req">*</span>
                         </label>
-                        {{ forms.email }}
+                        {{ form.email }}
                     </div>
 
                     <div class="field-wrap">
                         <label>
                             Set A Password<span class="req">*</span>
                         </label>
-                        {{ forms.password1 }}
+                        {{ form.password1 }}
                     </div>
                     <div class="field-wrap">
                         <label>
                             Repeat the Password<span class="req">*</span>
                         </label>
-                        {{ forms.password2 }}
+                        {{ form.password2 }}
                     </div>
 
                     <button type="submit" class="button button-block"/>
@@ -152,4 +154,5 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </body>
 </html>
+{% endblock %}
 
