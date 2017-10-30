@@ -1,0 +1,69 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EventUs-Events Around You</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="{% static "css/home.css" %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400, 600" rel="stylesheet">
+  </head>
+
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+        <nav class="navbar navbar-default navbar-fixed-top">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src={% static 'images/eventus.png' %} alt="Logo" style="width:60px;height:60px;border:0;"></a>
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li><a href="#">EVENTS</a></li>
+                <li><a href="#">COLLEGE</a></li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+
+                {% if user.is_authenticated  and user.is_active %}
+
+                    <li class="">
+                        <a href="{% url 'logout' %}">
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;
+                            <button class="btn btn-primary">LOGOUT</button>
+
+                        </a>
+
+                    </li>
+                {% else %}
+                <li class="">
+                    <a href="{% url 'login' %}">
+                        <button type="button" class="btn btn-main">Sign In</button>
+                    </a>
+                </li>
+
+                <li><a href="{% url 'mywebsite:signup' %}"><button type="button" class="btn btn-main">Sign Up</button></a></li>
+
+                {% endif %}
+                 </ul>
+            </div>
+          </div>
+        </nav>
+     {% block content %}
+     {% endblock %}
+    </body>
+</html>
