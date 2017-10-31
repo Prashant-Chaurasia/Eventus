@@ -2,7 +2,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Event
+from .models import Event, Comment
 
 # If you don't do this you cannot use Bootstrap CSS
 
@@ -53,3 +53,10 @@ class EventForm(forms.ModelForm):
                   'Categories','Event_Start_Date', 'Event_Last_Date',
                   'Last_Date_For_Apply','Rulebook_Of_Event','Apply_Link_Of_Event',
                   'Venue_Of_Event','Terms_and_Condtions_Of_Event')
+
+
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = ('author','text')
