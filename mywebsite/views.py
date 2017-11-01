@@ -15,9 +15,9 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.models import User
 import smtplib
-from .models import Event
+from .models import Event , Comment, Exhibition
 from django.utils import timezone
-from .forms import EventForm
+from .forms import EventForm, CommentForm, ExhibitionForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
@@ -66,7 +66,7 @@ def signupForOrganizer(request):
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate Your InterAdicr Account'
-            message = render_to_string('mywebsite/account_activation_emailForCompany.html',
+            message = render_to_string('mywebsite/account_activation_emailForOrganizer.html',
                                        {'user': user, 'domain': current_site.domain,
                                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                                         'token': account_activation_token.make_token(user), })
@@ -142,6 +142,7 @@ def events_list(request):
     # print("Posts: ", events)
     return render(request, 'mywebsite/event_list.html', {'events': events})
 
+@login_required()
 def events_detail(request, pk):
     event = get_object_or_404(Event, pk=pk)
     return render(request, 'mywebsite/event_detail.html', {'event': event})
@@ -160,3 +161,56 @@ def events_new(request):
     else:
         form = EventForm()
     return render(request, 'mywebsite/event_edit.html', {'form': form})
+
+def add_comment_to_post(request, pk):
+    event = get_object_or_404(Event, pk=pk)
+    #print("Ankur" + event)
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.event = event
+            comment.save()
+            return redirect('mywebsite:events_detail', pk=event.pk)
+    else:
+        form = CommentForm()
+    return render(request, 'mywebsite/add_comment_to_post.html', {'form': form})
+
+@login_required()
+def comment_approve(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.approve()
+    return redirect('mywebsite:events_detail', pk=comment.event.pk)
+
+
+@login_required()
+def comment_remove(request, pk):
+    comment = get_object_or_404(Comment, pk=pk)
+    comment.delete()
+    return redirect('post_detail', pk=comment.event.pk)
+
+
+def exhibitions_list(request):
+    exhibitions = Exhibition.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
+    return  render(request,'mywebsite/exhibition_list.html',{'exhibitions': exhibitions})
+
+@login_required()
+def exhibitions_detail(request, pk):
+    exhibition = get_object_or_404(Exhibition, pk=pk)
+    return render(request, 'mywebsite/exhibition_detail.html', {'exhibition': exhibition})
+
+@login_required()
+def exhibitions_new(request):
+    if request.method == "POST":
+        print(request.FILES)
+        form = ExhibitionForm(request.POST, request.FILES)
+        if form.is_valid():
+            exhibition = form.save(commit=False)
+            print("Post: ", form)
+            exhibition.author = request.user
+            exhibition.save()
+            return redirect('mywebsite:exhibitions_detail', pk=exhibition.pk)
+    else:
+        form = ExhibitionForm()
+    return render(request, 'mywebsite/exhibition_edit.html', {'form': form})
+

@@ -44,3 +44,37 @@ class Event(models.Model):
     def __str__(self):
         return self.Event_Name
 
+class Comment(models.Model):
+    event = models.ForeignKey('mywebsite.Event', related_name='comments')
+    author = models.CharField(max_length=300)
+    text = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    approved_comment = models.BooleanField(default=False)
+
+    def approve(self):
+        self.approved_comment = True
+        self.save()
+
+    def __str__(self):
+        return self.text
+
+
+#Model for Exhibition
+class Exhibition(models.Model):
+    author = models.ForeignKey('auth.user')
+    Exhibition_Name = models.CharField(max_length=200)
+    Organized_by = models.CharField(max_length=300)
+    Sponsered_by = models.TextField()
+    Exhibition_Image = models.FileField(null=True, blank=True)
+    Exhibition_Venue = models.TextField()
+    created_date = models.DateTimeField(default=timezone.now)
+    published_date = models.DateTimeField(default=timezone.now)
+
+    def publish(self):
+        self.published_date = timezone.now()
+        self.save()
+
+    def __str__(self):
+        return self.Exhibition_Name
+
+

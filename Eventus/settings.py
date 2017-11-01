@@ -125,7 +125,7 @@ USE_TZ = True
 
 
 
-LOGIN_REDIRECT_URL = '/firstpage'
+LOGIN_REDIRECT_URL = '/events'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 AUTHENTICATION_BACKENDS = (

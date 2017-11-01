@@ -6,11 +6,11 @@
         <div class="row text-center">
             <div class="col-md-12">
                 <h1>
-                    Event'17
+                    Exhibition'17
                 </h1>
-                <a href="{% url 'mywebsite:events_new' %}">
+                <a href="{% url 'mywebsite:exhibitions_new' %}">
                     <button class="btn btn-primary">
-                        Add New Event
+                        Add New Exhibition
                     </button>
                 </a>
                 <br>
@@ -21,19 +21,17 @@
         <br>
         <br>
         <div class="row">
-            {% for event in events %}
+            {% for exhibition in exhibitions %}
                 <div class="col-md-3">
                     <div class="thumbnail" id="thumbanailText">
-                        <a href="{% url 'mywebsite:events_detail' pk=event.pk %}">
-                            <img src="{{ event.Event_Image.url }}" class="ideaImage" alt="Event Image">
+                        <a href="{% url 'mywebsite:exhibitions_detail' pk=exhibition.pk %}">
+                            <img src="{{ exhibition.Exhibition_Image.url }}" class="ideaImage" alt="Event Image">
                             <h3>
-                                {{ event.Event_Name }}
+                                {{ exhibition.Exhibition_Name }}
                             </h3>
                             <h4>
-                                {{ event.Venue_Of_Event }}
+                                {{ exhibition.Exhibition_Venue }}
                             </h4>
-
-
                         </a>
 
                     </div>
