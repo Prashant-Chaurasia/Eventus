@@ -1,0 +1,42 @@
+{% extends 'mywebsite/baseEventDetail.html' %}
+{% load staticfiles %}
+{% block content %}
+    <link href="{% static "css/eventDetailStyle.css" %}" rel="stylesheet">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="eventDetailFirstTag">
+                    Exhibition Details
+                </h1>
+
+            </div>
+        </div>
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6" id="eventDetailsSecondTag">
+                <h2>
+                    {{ exhibition.Exhibition_Name }}
+                </h2>
+                <hr>
+                <h3>
+                    {{ exhibition.Organized_by}}
+                </h3>
+                <hr>
+                <h3>
+                    {{ exhibition.Exhibition_Venue }}
+                </h3>
+                <hr>
+
+            </div>
+
+            <div class="col-md-6">
+                <img src="{{ exhibition.Exhibition_Image.url }}" class="EventImage" alt="Event Image">
+            </div>
+        </div>
+
+        <br>
+        <br>
+    </div>
+
+{% endblock %}
