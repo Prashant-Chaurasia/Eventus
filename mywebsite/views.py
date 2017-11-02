@@ -17,13 +17,15 @@ from django.contrib.auth.models import User
 import smtplib
 from .models import Event , Comment, Exhibition
 from django.utils import timezone
-from .forms import EventForm, CommentForm, ExhibitionForm
+from .forms import EventForm, CommentForm, ExhibitionForm, ContactForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
 
 def home(request):
-    return render(request, "mywebsite/home.html")
+
+    form = ContactForm
+    return render(request, "mywebsite/home.html", {'form': form})
 
 
 def firstpage(request):
@@ -214,3 +216,15 @@ def exhibitions_new(request):
         form = ExhibitionForm()
     return render(request, 'mywebsite/exhibition_edit.html', {'form': form})
 
+
+def contact_new(request):
+    print(request)
+    if request.method == "POST":
+        form = ContactForm(request.POST)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('mywebsite:home')
+    else:
+        form = ContactForm()
+        return render(request, 'mywebsite/home.html', {'form':form})
