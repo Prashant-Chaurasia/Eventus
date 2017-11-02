@@ -198,21 +198,30 @@
               <p><span class="glyphicon glyphicon-envelope"></span> eventus@gmail.com</p>
             </div>
             <div class="col-sm-7">
-              <div class="row">
-                <div class="col-sm-6 form-group">
-                  <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+              <form action="{% url 'mywebsite:contactus' %}" method="post">
+                  {% csrf_token %}
+                <div class="row">
+
+               <div class="col-sm-6 form-group">
+                    {{ form.Name }}
                 </div>
                 <div class="col-sm-6 form-group">
-                  <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                    {{ form.Email }}
                 </div>
               </div>
-              <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+                    {{ form.Comment }}
+                  <br>
               <div class="row">
                 <div class="col-sm-12 form-group">
-                  <button class="btn btn-default pull-right" type="submit">Send</button>
+                  <button class="btn btn-default pull-right" type="submit" onsubmit="myFunction()">Send</button>
                 </div>
               </div>
-            </div>
+              </form>
+
+                {% for error in form.errors %}
+                        <p style="color: red">{{ error }}</p>
+                {% endfor %}
+
           </div>
         </div>
 
@@ -225,6 +234,9 @@
 
 
    <script>
+        function myFunction() {
+           alert("Thanks for your message we will contact you soon.");
+        }
         $(document).ready(function(){
           // Add smooth scrolling to all links in navbar + footer link
           $(".navbar a, footer a[href='#myPage']").on('click', function(event) {

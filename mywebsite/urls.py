@@ -17,4 +17,6 @@ urlpatterns = [
     url(r'^exhibition/$', views.exhibitions_list, name='exhibitions_list'),
     url(r'^exhibitions/post/new/$', views.exhibitions_new, name='exhibitions_new'),
     url(r'^exhibitions/post/(?P<pk>\d+)/$', views.exhibitions_detail, name='exhibitions_detail'),
+    #url for contactus
+    url(r'^contactus/$',views.contact_new, name='contactus'),
 ]
