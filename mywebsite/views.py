@@ -15,9 +15,9 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.models import User
 import smtplib
-from .models import Event , Comment, Exhibition
+from .models import Event , Comment
 from django.utils import timezone
-from .forms import EventForm, CommentForm, ExhibitionForm
+from .forms import EventForm, CommentForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
@@ -66,7 +66,7 @@ def signupForOrganizer(request):
             user.save()
             current_site = get_current_site(request)
             subject = 'Activate Your InterAdicr Account'
-            message = render_to_string('mywebsite/account_activation_emailForOrganizer.html',
+            message = render_to_string('mywebsite/account_activation_emailForCompany.html',
                                        {'user': user, 'domain': current_site.domain,
                                         'uid': urlsafe_base64_encode(force_bytes(user.pk)),
                                         'token': account_activation_token.make_token(user), })
@@ -188,29 +188,4 @@ def comment_remove(request, pk):
     comment = get_object_or_404(Comment, pk=pk)
     comment.delete()
     return redirect('post_detail', pk=comment.event.pk)
-
-
-def exhibitions_list(request):
-    exhibitions = Exhibition.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    return  render(request,'mywebsite/exhibition_list.html',{'exhibitions': exhibitions})
-
-@login_required()
-def exhibitions_detail(request, pk):
-    exhibition = get_object_or_404(Exhibition, pk=pk)
-    return render(request, 'mywebsite/exhibition_detail.html', {'exhibition': exhibition})
-
-@login_required()
-def exhibitions_new(request):
-    if request.method == "POST":
-        print(request.FILES)
-        form = ExhibitionForm(request.POST, request.FILES)
-        if form.is_valid():
-            exhibition = form.save(commit=False)
-            print("Post: ", form)
-            exhibition.author = request.user
-            exhibition.save()
-            return redirect('mywebsite:exhibitions_detail', pk=exhibition.pk)
-    else:
-        form = ExhibitionForm()
-    return render(request, 'mywebsite/exhibition_edit.html', {'form': form})
 
