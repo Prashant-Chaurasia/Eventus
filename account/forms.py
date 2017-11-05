@@ -2,7 +2,11 @@ from django.contrib.auth.forms import AuthenticationForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.shortcuts import redirect, render
+
 from .models import Event
+from django.contrib import auth, messages
+
 
 # If you don't do this you cannot use Bootstrap CSS
 

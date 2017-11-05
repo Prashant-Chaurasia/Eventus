@@ -1,4 +1,4 @@
-{% extends 'mywebsite/baseForLoginNdSignup.html' %}
+{% extends 'account/base.html' %}
 {% load staticfiles %}
 {% block content %}
 <html>
@@ -6,7 +6,7 @@
     <title>Student and organizer</title>
     <link rel="stylesheet" href="{% static 'css/lbg.css' %}" type="text/css">
 
-    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    {% comment %}<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>{% endcomment %}
 
 
 </head>
@@ -19,15 +19,23 @@
 
         <ul class="tab-group">
             <li class="tab active"><a href="#login">Student</a></li>
-            <li class="tab "><a href="#login1">Organizer</a></li>
+            <li class="tab "><a href="#login1">Faculty</a></li>
         </ul>
+
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
 
         <div class="tab-content">
             <div id="login">
 
                 <h1>Student</h1>
 
-                <form method="post" action="{% url 'login' %}">
+                <form method="post" action="{% url 'account:login' %}">
                     {% csrf_token %}
                     <div class="field-wrap">
                         <label>
@@ -55,8 +63,8 @@
             </div>
             <div id="login1">
 
-                <h1>Student</h1>
-                <form method="post" action="{% url 'login' %}">
+                <h1>Faculty</h1>
+                <form method="post" action="{% url 'account:login' %}">
                     {% csrf_token %}
                     <div class="field-wrap">
                         <label>
@@ -74,10 +82,12 @@
 
                     <p class="forgot"><a href="#">Forgot Password?</a></p>
 
+                    <input type="hidden" name="next" value="{{ next }}" />
+
                     <button type="submit" class="button button-block"/>
                     Log In
                     </button>
-                    <input type="hidden" name="next" value="{{ next }}"/><br>
+                    <br>
 
                 </form>
 

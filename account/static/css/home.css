@@ -1,9 +1,5 @@
-html, body {
-  margin: 0;
-  padding: 0;
-}
 
-h2 {
+.about .services .contact h2 {
     font-size: 24px;
     text-transform: uppercase;
     color: #303030;
@@ -11,7 +7,7 @@ h2 {
     margin-bottom: 30px;
 }
 
-h4 {
+.about .services .contact h4 {
     font-size: 19px;
     line-height: 1.375em;
     color: #303030;
@@ -56,8 +52,8 @@ h4 {
 
 .jumbotron {
   background: #4682b4 no-repeat center center;
-  background-size: cover;
-  height: 800px;
+  background-size: auto;
+  height: 650px;
   padding : 100px 25px;
 }
 
@@ -100,7 +96,7 @@ h4 {
   color: white;
   font-family: 'Raleway', sans-serif;
   font-weight: 600;
-  font-size: 70px;
+  font-size: 50px;
   margin-top: 0;
   margin-bottom: 80px;
   text-transform: uppercase;

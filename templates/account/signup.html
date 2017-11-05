@@ -1,4 +1,4 @@
-{% extends 'mywebsite/baseForLoginNdSignup.html' %}
+{% extends 'account/base.html' %}
 {% load staticfiles %}
 {% block content %}
 <html>
@@ -6,7 +6,7 @@
     <title>Sign up or login</title>
     <link rel="stylesheet" href="{% static 'css/lbg.css' %}" type="text/css">
 
-    <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+    {% comment %}<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>{% endcomment %}
 
 
 </head>
@@ -19,14 +19,14 @@
 
         <ul class="tab-group">
             <li class="tab active"><a href="#signup">Student</a></li>
-            <li class="tab "><a href="#signup1">Organizer</a></li>
+            <li class="tab "><a href="#signup1">Faculty</a></li>
         </ul>
 
         <div class="tab-content">
             <div id="signup">
-                <h1>Sign Up for Student</h1>
+                <h1>Student</h1>
 
-                 <form method="post" action="{% url 'mywebsite:signup' %}">
+                 <form method="post" action="{% url 'account:signup' %}">
                     {% csrf_token %}
                     <div class="field-wrap">
                         <label>
@@ -82,9 +82,9 @@
             </div>
 
             <div id="signup1">
-                <h1>Sign Up for Organizer</h1>
+                <h1>Faculty</h1>
 
-                 <form method="post" action="{% url 'mywebsite:signup' %}">
+                 <form method="post" action="{% url 'account:signup' %}">
                     {% csrf_token %}
                     <div class="field-wrap">
                         <label>

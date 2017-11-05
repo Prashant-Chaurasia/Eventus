@@ -1,8 +1,9 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EventUs-Events Around You</title>
+    <title>EvenTUs-Events Around You</title>
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -29,33 +30,33 @@
 
             <div class="collapse navbar-collapse" id="myNavbar">
               <ul class="nav navbar-nav">
-                <li><a href="{% url 'mywebsite:events_list' %}">EVENTS</a></li>
+                <li><a href="#">EVENTS</a></li>
                 <li><a href="#">COLLEGE</a></li>
               </ul>
 
               <ul class="nav navbar-nav navbar-right">
-                <li><a href="#about">ABOUT</a></li>
-                <li><a href="#services">SERVICES</a></li>
-                <li><a href="#contact">CONTACT</a></li>
 
                 {% if user.is_authenticated  and user.is_active %}
 
                     <li class="">
-                        <a href="{% url 'logout' %}">
-                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>&nbsp;
-                            <button class="btn btn-primary">LOGOUT</button>
-
+                        <a href="{% url 'account:logout' %}">
+                            <button class="btn btn-main">LOGOUT</button>
                         </a>
 
                     </li>
                 {% else %}
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+
                 <li class="">
-                    <a href="{% url 'login' %}">
+
+                    <a href="{% url 'account:login' %}">
                         <button type="button" class="btn btn-main">Sign In</button>
                     </a>
                 </li>
 
-                <li><a href="{% url 'mywebsite:signup' %}"><button type="button" class="btn btn-main">Sign Up</button></a></li>
+                <li><a href="{% url 'account:signup' %}"><button type="button" class="btn btn-main">Sign Up</button></a></li>
 
                 {% endif %}
                  </ul>
@@ -64,5 +65,11 @@
         </nav>
      {% block content %}
      {% endblock %}
+     <div class="footer">
+        <div class="container">
+
+          <p>&copy; EventUs 2017</p>
+        </div>
+      </div>
     </body>
 </html>
