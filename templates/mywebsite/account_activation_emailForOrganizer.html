@@ -1,8 +1,0 @@
-{% autoescape off %}
-    Hi {{ user.username }},
-
-    Please click on the link below to confirm your registration:
-    If link doesn't appear in mail then copy and paste following text in your browser.
-
-    http://{{ domain }}{% url 'activateForOrganizer' uidb64=uid token=token %}
-{% endautoescape %}
