@@ -15,9 +15,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.auth.models import User
 import smtplib
-from .models import Event
 from django.utils import timezone
-from .forms import EventForm
 from django.shortcuts import render, get_object_or_404, redirect
 
 # Create your views here.
@@ -135,28 +133,3 @@ def send_verification_mail(email, msg):
         print('successfully sent the mail')
     except:
         print("failed to send mail")
-
-
-def events_list(request):
-    events = Event.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
-    # print("Posts: ", events)
-    return render(request, 'account/event_list.html', {'events': events})
-
-def events_detail(request, pk):
-    event = get_object_or_404(Event, pk=pk)
-    return render(request, 'account/event_detail.html', {'event': event})
-
-@login_required()
-def events_new(request):
-    if request.method == "POST":
-        print(request.FILES)
-        form = EventForm(request.POST, request.FILES)
-        if form.is_valid():
-            event = form.save(commit=False)
-            print("Post: ", form)
-            event.author = request.user
-            event.save()
-            return redirect('account:events_detail', pk=event.pk)
-    else:
-        form = EventForm()
-    return render(request, 'account/event_edit.html', {'form': form})

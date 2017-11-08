@@ -18,29 +18,3 @@ def update_user_profile(sender, instance, created, **kwargs):
         Profile.objects.create(user=instance)
     instance.profile.save()
 
-#Model for Event
-class Event(models.Model):
-    author = models.ForeignKey('auth.User')
-    Event_Name = models.CharField(max_length=200)
-    Organized_By = models.TextField()
-    Event_Image = models.FileField(null=True, blank=True)
-    Short_Description_Of_Event = models.CharField(max_length=300)
-    Long_Description_Of_Event = models.TextField()
-    Categories = models.TextField()
-    Event_Start_Date = models.DateField()
-    Event_Last_Date = models.DateField()
-    Last_Date_For_Apply = models.DateField(null=True,blank=True)
-    Rulebook_Of_Event = models.FileField(null=True, blank=True)
-    Apply_Link_Of_Event = models.TextField()
-    Venue_Of_Event = models.TextField()
-    Terms_and_Condtions_Of_Event = models.TextField()
-    created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField(default=timezone.now)
-
-    def publish(self):
-        self.published_date = timezone.now()
-        self.save()
-
-    def __str__(self):
-        return self.Event_Name
-
