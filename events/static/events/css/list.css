@@ -99,6 +99,7 @@ margin :65px 65px 5px 65px; }
   white-space: nowrap;
   color: white;
   font-size: 20px;
+  font-style: italic;
   position: absolute;
   overflow: hidden;
   top: 50%;

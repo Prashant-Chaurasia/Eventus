@@ -22,7 +22,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('account.urls', namespace='account')),
-    url(r'',include('events.urls',namespace='events',app_name='events'))
+    url(r'',include('events.urls',namespace='events',app_name='events')),
+    url(r'',include('college.urls',namespace='college',app_name='college')),
 ]
 
 

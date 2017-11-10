@@ -2,13 +2,22 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from .models import Events
 from .forms import EventForm
+from django.core.paginator import Paginator, EmptyPage,PageNotAnInteger
 from django.shortcuts import redirect
 from django.utils import timezone
 # Create your views here.
 
 def events_list(request):
-    events = Events.posted.all()
-    return render(request,'events/Events/list.html',{'events':events})
+    event_list = Events.posted.all()
+    paginator = Paginator(event_list, 3)  # 3 posts in each page
+    page = request.GET.get('page')
+    try:
+        events = paginator.page(page)
+    except PageNotAnInteger:
+        events = paginator.page(1)
+    except EmptyPage:
+        events = paginator.page(paginator.num_pages)
+    return render(request,'events/Events/list.html',{'page':page,'events':events})
 
 def event_detail(request, year, month, day, event):
     event = get_object_or_404(Events, slug=event,
@@ -19,7 +28,7 @@ def event_detail(request, year, month, day, event):
 
 def create_event(request):
     if request.method == "POST":
-        form = EventForm(request.POST)
+        form = EventForm(request.POST,request.FILES)
         if form.is_valid():
             Events = form.save(commit=False)
             Events.author = request.user

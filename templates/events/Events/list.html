@@ -1,4 +1,4 @@
-{% extends "account/base.html" %}
+{% extends "base.html" %}
 {% load staticfiles %}
 {% block content %}
 <html>
@@ -20,13 +20,15 @@
               {% for event in events %}
                 <div class="card">
                 <div class="landscape">
+                    {% if event.cover_image %}
+                        <img src="{{ event.cover_image.url }}" alt="Avatar" class="image">
+                    {% endif %}
                   <img src="{% static 'events/images/images.jpeg' %}" alt="Avatar" class="image">
                     <div class="overlay">
-                        <div class="short_desc_text">{{ event.short_description }}
+                        <div class="short_desc_text">{{ event.description }}
                             <br>
                             <button class="btn_learn_more"><span>Learn More</span></button>
                         </div>
-
                     </div>
                 </div>
                   <div class="event_container">
@@ -41,6 +43,7 @@
                 </div>
 
                 {% endfor %}
+            {% include "events/Events/pagination.html" with page=events %}
             </div>
 
 
