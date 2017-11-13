@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'events/css/list.css' %}" type="text/css">
+    {% comment %}<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>{% endcomment %}
+</head>
+    <body>
+    <div class="clouds">
+        <div class="tab">
+          <button id="defaultOpen" class="tablinks" onclick="openCity(event, 'Upcoming')">Upcoming</button>
+          <button class="tablinks" onclick="openCity(event, 'Past')">Past</button>
+          <button class="tablinks" onclick="openCity(event, 'Institute')">Institute</button>
+          <button class="tablinks" onclick="openCity(event, 'My Events')">My Events</button>
+        </div>
+
+        <!--Upcoming Events Page -->
+            <div id="Upcoming" class="tabcontent">
+              {% for event in events %}
+                <div class="card">
+                <div class="landscape">
+                    {% if event.cover_image %}
+                        <img src="{{ event.cover_image.url }}" alt="Avatar" class="image">
+                    {% endif %}
+                  <img src="{% static 'events/images/images.jpeg' %}" alt="Avatar" class="image">
+                    <div class="overlay">
+                        <div class="short_desc_text">{{ event.description }}
+                            <br>
+                            <button class="btn_learn_more"><span>Learn More</span></button>
+                        </div>
+                    </div>
+                </div>
+                  <div class="event_container">
+                      <h4><b><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></b></h4>
+                    <p>{{ event.venue }}</p>
+
+                    <p class="date">
+                        Posted  {{ event.postdate }} by {{ event.author }}
+                    </p>
+                  </div>
+
+                </div>
+
+                {% endfor %}
+            {% include "events/Events/pagination.html" with page=events %}
+            </div>
+
+
+        <!--Past Events Page -->
+        <div id="Past" class="tabcontent">
+            <div>
+                <h3>Past</h3>
+                <p>Past Events will be displayed here.</p>
+            </div>
+
+        </div>
+
+
+        <!--Institute Events Page -->
+        <div id="Institute" class="tabcontent">
+          <h3>Institute</h3>
+          <p>Intra College Events will be displayed here.</p>
+        </div>
+
+        <!--Suggested Events Page -->
+        <div id="My_Events" class="tabcontent">
+          <h3>My Events</h3>
+          <p>Events posted by you/users will be displayed here.</p>
+        </div>
+        <script src="{% static 'events/js/list.js' %}"></script>
+    </div>
+    </body>
+</html>
+{% endblock %}
+

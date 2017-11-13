@@ -1,0 +1,77 @@
+ /* Create four equal columns that floats next to each other */
+ body{
+    background-color:#f1f1f1;
+}
+.clouds {
+margin :70px 55px 5px 55px;
+ }
+
+.column {
+    float: left;
+    width: 25%;
+    padding: 10px;
+}
+
+.column img {
+    width: 100%;
+}
+
+.row {
+    margin-top: 24px;
+
+}
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.college_content {
+    background-color: #fff;
+    max-width: 300px;
+    max-height: 350px;
+    box-shadow: 0 4px 8px 0 rgba(7,7,7,0.6);
+    transition: 0.3s;
+    text-align: center;
+    font-style: italic ;
+    font-size: 18px;
+    display: block;
+    position: relative;
+    overflow: hidden;
+    background-size: contain;
+}
+
+.college_name {
+    position:static;
+    max-height: 40px;
+
+}
+
+.college_logo {
+    max-width: 240px;
+    height: 250px;
+    text-align: center;
+    display: block;
+    margin: auto;
+    position: relative;
+    overflow: hidden;
+    background-size:contain ;
+}
+
+.thumbnail {
+    height: 280px;
+}
+/* Responsive layout - makes a two column-layout instead of four columns */
+@media (max-width: 800px) {
+    .column {
+        width: 50%;
+    }
+}
+
+/* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
+@media (max-width: 600px) {
+    .column {
+        width: 100%;
+   }
+}

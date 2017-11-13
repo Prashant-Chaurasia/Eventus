@@ -1,0 +1,127 @@
+{% extends 'account/../base.html' %}
+{% load staticfiles %}
+{% block content %}
+    <link href="{% static "account/css/eventListStyle.css" %}" rel="stylesheet">
+    <div class="container-fluid " id="courses-container">
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1>
+                    Event'17
+                </h1>
+                <a href="{% url 'account:events_new' %}">
+                    <button class="btn btn-primary">
+                        Add New Event
+                    </button>
+                </a>
+                <br>
+                <br>
+            </div>
+        </div>
+        <hr>
+        <br>
+        <br>
+        <div class="row">
+            {% for event in events %}
+                <div class="col-md-3">
+                    <div class="thumbnail" id="thumbanailText">
+                        <a href="{% url 'account:events_detail' pk=event.pk %}">
+                            <img src="{{ event.Event_Image.url }}" class="ideaImage" alt="Event Image">
+                            <h3>
+                                {{ event.Event_Name }}
+                            </h3>
+                            <h4>
+                                {{ event.Venue_Of_Event }}
+                            </h4>
+
+
+                        </a>
+
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h1 id="secondary-header">
+                    Browse by Categories
+                </h1>
+
+            </div>
+        </div>
+        <hr>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <img src="{% static 'account/images/100x100' %}" id="im1">
+
+                </div>
+                <div class="col-md-3">
+                    <img src="{% static 'account/images/100x100' %}" id="im2">
+                </div>
+                <div class="col-md-3">
+                    <img src="{% static 'account/images/100x100' %}" id="im3">
+                </div>
+
+            </div>
+            <br>
+
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{% static 'account/images/100x100' %}" id="im2">
+                </div>
+                <div class="col-md-3">
+                    <img src="{% static 'account/images/100x100' %}" id="im3">
+                </div>
+                <div class="col-md-6">
+                    <img src="{% static 'account/images/100x100' %}" id="im1">
+                </div>
+
+            </div>
+
+            <hr>
+
+        </div>
+
+        <script>
+            $(document).ready(function () {
+                // Add smooth scrolling to all links in navbar + footer link
+                $(".navbar a, footer a[href='#myPage']").on('click', function (event) {
+                    // Make sure this.hash has a value before overriding default behavior
+                    if (this.hash !== "") {
+                        // Prevent default anchor click behavior
+                        event.preventDefault();
+
+                        // Store hash
+                        var hash = this.hash;
+
+                        // Using jQuery's animate() method to add smooth page scroll
+                        // The optional number (900) specifies the number of milliseconds it takes to scroll to the specified area
+                        $('html, body').animate({
+                            scrollTop: $(hash).offset().top
+                        }, 900, function () {
+
+                            // Add hash (#) to URL when done scrolling (default click behavior)
+                            window.location.hash = hash;
+                        });
+                    } // End if
+                });
+
+                $(window).scroll(function () {
+                    $(".slideanim").each(function () {
+                        var pos = $(this).offset().top;
+
+                        var winTop = $(window).scrollTop();
+                        if (pos < winTop + 600) {
+                            $(this).addClass("slide");
+                        }
+                    });
+                });
+            })
+        </script>
+
+
+    </div>
+
+{% endblock %}
+

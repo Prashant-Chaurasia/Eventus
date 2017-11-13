@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
+<html>
+<head>
+    <link rel="stylesheet" href="{% static 'college/css/list.css' %}" type="text/css">
+</head>
+    <body>
+    <div class="clouds">
+    <strong><h1 style="text-align: center">Colleges</h1></strong>
+
+        {% comment %}<div class="row">
+        {% for college in colleges %}
+          <div class="column">
+            <div class="college_content">
+                <div class="college_name">
+                    <strong><p>{{ college.name }}</p></strong>
+                    </div>
+            <hr style="border-color:#303030 ;height: 5px">
+                <div class="college_logo">
+                    {% if college.logo %}
+                    <img src="{{ college.logo.url }}">
+                  {% endif %}
+                </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>{% endcomment %}
+
+
+        <div class="row">
+
+            {% for college in colleges %}
+            <div class="col-md-3">
+                 <div class="college_content">
+                <div class="college_name">
+                    <strong><p>{{ college.name }}</p></strong>
+                    </div>
+            <hr style="border-color:#303030 ;height: 5px">
+                <div class="college_logo">
+                    {% if college.logo %}
+                    <img src="{{ college.logo.url }}">
+                  {% endif %}
+                </div>
+            </div>
+            </div>
+
+                <!-- if last column in row -->
+                {% if forloop.counter|divisibleby:"4" and not forloop.last %}
+                </div><div class="row">
+                {% endif %}
+
+            {% endfor %}
+
+        </div>
+
+       </div>
+    </body>
+</html>
+{% endblock %}
+
