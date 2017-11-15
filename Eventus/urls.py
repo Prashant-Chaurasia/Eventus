@@ -18,12 +18,19 @@ from django.conf.urls import url,include
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from account.regbackend2 import StudentRegistrationView
+from account import views
+
 
 urlpatterns = [
+
     url(r'^admin/', admin.site.urls),
-    url(r'', include('account.urls', namespace='account')),
+    url(r'^accounts/register/$', StudentRegistrationView.as_view(), name='registration_register'),
+    url(r'^home/',views.home, name = 'home'),
     url(r'',include('events.urls',namespace='events',app_name='events')),
     url(r'',include('college.urls',namespace='college',app_name='college')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^$',include('homepage.urls')),
 ]
 
 

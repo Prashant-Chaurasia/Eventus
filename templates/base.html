@@ -39,7 +39,7 @@
                 {% if user.is_authenticated  and user.is_active %}
 
                     <li class="">
-                        <a href="{% url 'account:logout' %}">
+                        <a href="{% url 'auth_logout' %}">
                             <button class="btn btn-main">LOGOUT</button>
                         </a>
 
@@ -51,12 +51,12 @@
 
                 <li class="">
 
-                    <a href="{% url 'account:login' %}">
+                    <a href="{% url 'auth_login' %}">
                         <button type="button" class="btn btn-main">Sign In</button>
                     </a>
                 </li>
 
-                <li><a href="{% url 'account:signup' %}"><button type="button" class="btn btn-main">Sign Up</button></a></li>
+                <li><a href="{% url 'registration_register' %}"><button type="button" class="btn btn-main">Sign Up</button></a></li>
 
                 {% endif %}
                  </ul>

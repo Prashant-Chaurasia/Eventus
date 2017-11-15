@@ -10,6 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'Eventusactivation@gmail.com'
+EMAIL_HOST_PASSWORD = 'up32cl2752'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+
+
 import os
 from . import keys,secrets
 from django.core.urlresolvers import reverse_lazy
@@ -33,16 +42,21 @@ DEBUG = keys.DEBUG_STATUS
 ALLOWED_HOSTS = [keys.ALLOWED_HOST]
 
 
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
     'account',
     'events',
     'college',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
@@ -50,10 +64,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    #'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -130,19 +143,6 @@ USE_TZ = True
 
 
 
-LOGIN_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = '/events'
-LOGOUT_URL = 'logout'
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-AUTHENTICATION_BACKENDS = (
-    # 'social_core.backends.github.GithubOAuth2',
-    # 'social_core.backends.twitter.TwitterOAuth',
-    # 'social_core.backends.facebook.FacebookOAuth2',
-
-    'django.contrib.auth.backends.ModelBackend',
-)
-
 MEDIA_URL ='/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
@@ -158,3 +158,7 @@ else:
     STATIC_URL = '/static/'
 
 
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/home/'
