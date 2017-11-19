@@ -10,8 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'Eventusactivation@gmail.com'
+EMAIL_HOST_PASSWORD = 'up32cl2752'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+
+
+
 import os
 from . import keys,secrets
+from django.core.urlresolvers import reverse_lazy
+
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -30,14 +42,24 @@ DEBUG = keys.DEBUG_STATUS
 ALLOWED_HOSTS = [keys.ALLOWED_HOST]
 
 
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
+    'material',
+    'material.frontend',
+    'material.admin',
     'account',
+    'events',
+    'college',
+    'registration',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
+    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
@@ -45,9 +67,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
@@ -68,6 +90,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -112,10 +135,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -125,7 +147,8 @@ USE_TZ = True
 
 
 
-LOGIN_REDIRECT_URL = '/'
+MEDIA_URL ='/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 # Static files (CSS, JavaScript, Images)
@@ -137,3 +160,9 @@ if DEBUG == False:
     STATIC_ROOT = os.path.join((BASE_DIR), 'static')
 else:
     STATIC_URL = '/static/'
+
+
+ACCOUNT_ACTIVATION_DAYS = 7
+REGISTRATION_AUTO_LOGIN = True
+SITE_ID = 1
+LOGIN_REDIRECT_URL = '/home/'

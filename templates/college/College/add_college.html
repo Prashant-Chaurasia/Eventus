@@ -1,0 +1,23 @@
+{% extends 'base2.html' %}
+{% load material_form %}
+{% load staticfiles %}
+{% block content %}
+    <div class="container-fluid" style="text-align: center">
+        <div class="row ">
+            <h1>
+                Add Your College
+            </h1>
+        </div>
+        <hr>
+         <div style="max-width: 50%;text-align: center;border: solid ;margin:0 auto;">
+        <form method="POST" enctype="multipart/form-data" style="padding: 10px;font-size: 30px;">
+            {% csrf_token %}
+            {% form form=form %}{% endform %}
+            <button type="submit" name="_submit" class="btn">Submit</button>
+        </form>
+    </div>
+
+    </div>
+
+
+{% endblock %}

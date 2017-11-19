@@ -1,10 +1,17 @@
-from django.contrib.auth.forms import AuthenticationForm
 from django import forms
+from django.contrib.auth.models import User
+from registration.forms import RegistrationFormUniqueEmail, RegistrationForm
+from .models import Faculty, CollegeCode, Students
 
-# If you don't do this you cannot use Bootstrap CSS
+class FacultyForm(RegistrationFormUniqueEmail):
 
-class LoginForm(forms.Form):
-    username = forms.CharField(label="Username", max_length=30,
-                               widget=forms.TextInput(attrs={'class': 'form-control', 'name': 'username'}))
-    password = forms.CharField(label="Password", max_length=30,
-                               widget=forms.PasswordInput(attrs={'class': 'form-control', 'name': 'password'}))
+    Name = forms.CharField()
+    #Code = forms.CharField(label='', widget=forms.Select(choices=CollegeCode.objects.all()))
+    Code = forms.ModelChoiceField(queryset=CollegeCode.objects.all(), widget=forms.Select(attrs={'class':'selectpicker show-tick'}))
+
+
+class StudentForm(RegistrationFormUniqueEmail):
+
+    Name = forms.CharField()
+    RollNo = forms.CharField()
+    Code = forms.ModelChoiceField(queryset=CollegeCode.objects.all(), widget=forms.Select(attrs={'class':'selectpicker show-tick', 'data-width':'469px'}), empty_label='Please Select a College' )

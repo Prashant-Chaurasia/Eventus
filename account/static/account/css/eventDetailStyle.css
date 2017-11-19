@@ -1,0 +1,22 @@
+#eventDetailFirstTag{
+    text-align: center;
+}
+
+.EventImage{
+    width: 100%;
+    height: fit-content;
+}
+#eventDetailsSecondTag{
+    align-items: flex-end;
+}
+
+h3{
+    color: #666;
+}
+
+#CategoriesText{
+    position: relative;
+}
+h2{
+     text-transform: capitalize !important;
+}

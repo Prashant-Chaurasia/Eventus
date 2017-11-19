@@ -1,0 +1,45 @@
+
+.mySlides {
+    transition: 0.3s;
+    max-height: 400px;
+    overflow: hidden;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.box{
+	padding-left: 10%;
+	padding-right: 10%;
+	background-color: #f1f1f1 ;
+	padding-bottom: 5%;
+	box-shadow: 2px 2px 2px #fff;
+    text-align: center;
+
+}
+.my-left-pad{
+	padding-left: 90%;
+	padding-top:5%;
+}
+
+.fb-button{
+	cursor: pointer;
+}
+
+
+.fb-button{
+
+	float:left;
+		width: 2%;
+	height: 2%;
+}
+
+.w3-wide {
+    padding-top: 16px;
+}
+
+.w3-justify {
+	padding: 2%;
+}

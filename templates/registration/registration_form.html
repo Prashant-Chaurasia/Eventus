@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<html>
+<head>
+
+    <title>Sign up</title>
+     <link rel="stylesheet" href="{% static 'account/css/lbg.css' %}" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+</head>
+<body>
+
+<div class="clouds">
+
+    <div class=" form">
+
+            <div id="signup">
+                <h1>Sign Up for Student</h1>
+
+                 <form method="post" action=".">
+                    {% csrf_token %}
+                    <div class="field-wrap">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Name<span class="req">*</span>
+                        </label>
+                        {{ form.Name }}
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            RollNo<span class="req">*</span>
+                        </label>
+                        {{ form.RollNo }}
+                    </div>
+
+
+                    <div class="field-wrap">
+
+                        {{ form.Code }}
+                    </div>
+
+
+                    <div class="field-wrap">
+                        <label>
+                            Email Address<span class="req">*</span>
+                        </label>
+                        {{ form.email }}
+                    </div>
+
+                    <div class="field-wrap">
+                        <label>
+                            Set A Password<span class="req">*</span>
+                        </label>
+                        {{ form.password1 }}
+                    </div>
+                    <div class="field-wrap">
+                        <label>
+                            Repeat the Password<span class="req">*</span>
+                        </label>
+                        {{ form.password2 }}
+                    </div>
+
+                    <button type="submit" class="button button-block"/>
+                    Get Started</button>
+
+                </form>
+                {% for error in form.errors %}
+                        <p style="color: red">{{ error }}</p>
+                {% endfor %}
+
+            </div>
+
+
+        <!-- tab-content -->
+
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="{% static 'account/js/lbg.js' %}">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
+{% endblock %}
+

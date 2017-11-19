@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+<html>
+<head>
+    <title>Student and organizer</title>
+    <link rel="stylesheet" href="{% static 'account/css/lbg.css' %}" type="text/css">
+
+</head>
+<body>
+
+
+<div class="clouds" style="min-height: 500px">
+    <div class=" form" style="min-height: 460px;padding-top: 20px; padding-bottom: 20px">
+
+            <div id="login">
+                <form method="post" action="." style="padding-top: 50px">
+                    {% csrf_token %}
+                    <div class="field-wrap" style="margin: 20px">
+                        <label>
+                            Username<span class="req">*</span>
+                        </label>
+                        {{ form.username }}
+                    </div>
+
+                    <div class="field-wrap" style="margin: 20px">
+                        <label>
+                            Password<span class="req">*</span>
+                        </label>
+                        {{ form.password }}
+                    </div>
+
+                    <p class="forgot" style="margin: 20px" ><a href="{% url 'auth_password_reset' %}">Forgot Password?</a></p>
+
+                    <button type="submit" class="button button-block" >
+                    Log In
+                    </button>
+                    <input type="hidden" name="next" value="{{ next }}"/><br>
+
+                </form>
+
+            </div>
+    </div>
+</div>
+
+    <!-- Form-->
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="{% static 'account/js/lbg.js' %}">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</body>
+</html>
+{% endblock %}
+

@@ -14,12 +14,26 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
 
+from django.conf.urls import url,include
 from django.contrib import admin
-from django.conf.urls import include,url
-from django.contrib.auth import views
-from account.forms import LoginForm
+from django.conf import settings
+from django.conf.urls.static import static
+from account.regbackend2 import StudentRegistrationView
+from account import views
+
 
 urlpatterns = [
+
     url(r'^admin/', admin.site.urls),
-    url(r'', include('account.urls')),
+    url(r'^accounts/register/$', StudentRegistrationView.as_view(), name='registration_register'),
+    url(r'^home/',views.home, name = 'home'),
+    url(r'',include('events.urls',namespace='events',app_name='events')),
+    url(r'',include('college.urls',namespace='college',app_name='college')),
+    url(r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^$',include('homepage.urls')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root = settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
