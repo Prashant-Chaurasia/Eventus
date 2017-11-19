@@ -16,14 +16,15 @@
             <div id="login">
                 <form method="post" action="." style="padding-top: 50px">
                     {% csrf_token %}
-                    <div class="field-wrap" style="margin: 20px">
-                        <label>
+
+                    <div class="field-wrap" style="margin:10px 0px 30px 0px">
+                     <label>
                             Username<span class="req">*</span>
                         </label>
                         {{ form.username }}
                     </div>
 
-                    <div class="field-wrap" style="margin: 20px">
+                    <div class="field-wrap" style="margin: 30px 0px 30px 0px ">
                         <label>
                             Password<span class="req">*</span>
                         </label>
