@@ -9,6 +9,7 @@ from django.utils import timezone
 
 def events_list(request):
     event_list = Events.posted.all()
+    past_event_list = event_list.filter(last_date__lte=timezone.now())
     paginator = Paginator(event_list, 3)  # 3 posts in each page
     page = request.GET.get('page')
     try:
@@ -17,7 +18,7 @@ def events_list(request):
         events = paginator.page(1)
     except EmptyPage:
         events = paginator.page(paginator.num_pages)
-    return render(request,'events/Events/list.html',{'page':page,'events':events})
+    return render(request,'events/Events/list.html',{'page':page,'events':events,'past_events':past_event_list})
 
 def event_detail(request, year, month, day, event):
     event = get_object_or_404(Events, slug=event,

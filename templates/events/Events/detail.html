@@ -1,39 +1,17 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block content %}
 <html>
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" type="text/css" href="a.css">
+<link rel="stylesheet" type="text/css" href="{% static 'events/css/detail.css' %}">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="">
-<style>
-body {font-family: "Lato", sans-serif}
-.mySlides {display: none}
-</style>
+
 <body>
-
-<!-- Navbar -->
-<div class="w3-top">
-  <div class="w3-bar w3-black w3-card">
-    <a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">HOME</a>
-    <a href="#band" class="w3-bar-item w3-button w3-padding-large w3-hide-small">BAND</a>
-    <a href="#tour" class="w3-bar-item w3-button w3-padding-large w3-hide-small">TOUR</a>
-    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a>
-    <div class="w3-dropdown-hover w3-hide-small">
-      <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>
-      <div class="w3-dropdown-content w3-bar-block w3-card-4">
-        <a href="#" class="w3-bar-item w3-button">Merchandise</a>
-        <a href="#" class="w3-bar-item w3-button">Extras</a>
-        <a href="#" class="w3-bar-item w3-button">Media</a>
-      </div>
-    </div>
-    <a href="javascript:void(0)" class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
-  </div>
-</div>
-
 
 
 <!-- Page content -->
@@ -41,70 +19,71 @@ body {font-family: "Lato", sans-serif}
 
   <!-- Automatic Slideshow Images -->
   <div class="mySlides w3-display-container w3-center">
-    <img src="img.jpeg" style="width:100%">
+     {% if event.cover_image %}
+    <img src="{{ event.cover_image.url }}" class="image">
+      {% endif %}
     <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-      <h3>Los Angeles</h3>
-      <p><b>We had the best time playing at Venice Beach!</b></p>
-    </div>
-  </div>
-  <div class="mySlides w3-display-container w3-center">
-    <img src="img1.jpeg" style="width:100%">
-    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-      <h3>New York</h3>
-      <p><b>The atmosphere in New York is lorem ipsum.</b></p>
-    </div>
-  </div>
-  <div class="mySlides w3-display-container w3-center">
-    <img src="img3.png" style="width:100%">
-    <div class="w3-display-bottommiddle w3-container w3-text-white w3-padding-32 w3-hide-small">
-      <h3>Chicago</h3>
-      <p><b>Thank you, Chicago - A night we won't forget.</b></p>
+      <h3>{{ event.title}}</h3>
+      <p><b>Posted  {{ event.postdate }} by {{ event.author }}</b></p>
     </div>
   </div>
 
   <!-- The Band Section -->
   <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:1300px" id="band">
     <div class="box">
-    <h2 class="w3-wide">THE BAND</h2>
-    <p class="w3-opacity"><i>We love music</i></p>
-    <p class="w3-justify" style="padding-left: 10%">We have created a fictional band website. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
-      ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum consectetur
-      adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-      </div>
-      <br>
+    <h2 class="w3-wide"><strong>Description</strong></h2>
+    {% comment %}<p class="w3-opacity"><i>We love music</i></p>{% endcomment %}
+    <p class="w3-justify">{{ event.description }}</p>
+  </div>
+  <br>
+
+  <div class="box" >
+    <h2 class="w3-wide"><strong>Venue</strong></h2>
+    {% comment %}<p class="w3-opacity"><i>We love music</i></p>{% endcomment %}
+      <p class="w3-justify">{{ event.venue }}</p>
+  </div>
+  <br>
+
+
+  <div class="box"  >
+  <div class="w3-justify">
+
+    {% if event.facebook_link %}
+        <a href="{{ event.facebook_link }}"><img src="{% static 'events/images/fb.png' %}"  class="fb-button"style="width:4%;height:5%;float:left;margin-top: 1.5% ;"></a>
+    {% endif %}
+    {% if event.website %}
+        <a href="{{ event.website }}"><img src="{% static 'events/images/website.png' %}"  class="fb-button"style="width:4%;height:5%;float:left;margin-top: 1.5% ;"></a>
+    {% endif %}
+    <a href=""> <img src="{% static 'events/images/gps.png' %}"  class="fb-button"style="width:4%;height:4%;float:left;margin-top: 1.5%;margin-left:1%"></a>
+    <button class="btn btn-main" style="float:right;margin-top:1.5% ;font-size: 16px">Register</button><br>
+
+  </div>
+  </div>
+  <br>
+
+
+
+ <div class="box">
+     <h2 class="w3-wide" style="max-height: 200px">Dates</h2>
+         <div class="w3-justify">
+             <p class="serif" style="padding-left: 10px"><b> Start Date: </b> {{ event.start_date }}</p>
+             <p class="serif" style="padding-left: 10px"><b> End Date: </b>{{ event.last_date }}</p>
+             <p class="serif" style="padding-left: 10px"><b> Last Date to Apply: </b> {{ event.last_date_to_apply }}</p>
+         </div>
+
+  </div>
+
+<br>
+<div class="box">
+<div class="w3-row w3-padding-32">
+  <h1>Rulebook</h1>
+    {{ event.rulebook }}
+</div>
+<div data-role="page">
 
 
 
 
-
-
-
-        <div class="reg-box"  >
-          <img src="fb.png"  class="fb-button"style="width:4%;height:5%;float:left;margin-top: 1.5% ;">
-          <img src="insta.png"  class="fb-button"style="width:4%;height:4%;float:left;margin-top: 1.5%;margin-left:1%">
-          <img src="gps.png"  class="fb-button"style="width:4%;height:4%;float:left;margin-top: 1.5%;margin-left:1%">
-        <button class="button button2" style="float:right;margin-top:1.5% ">Register</button><br>
-      </div>
-       <br>
-
-
-
-     <div class="box">
-    <div class="w3-row w3-padding-32">
-      <h1>SPONSERS</h1>
-      <div class="w3-third">
-
-        <img src="img.jpeg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
-      </div>
-      <div class="w3-third">
-
-        <img src="img1.jpeg" class="w3-round w3-margin-bottom" alt="Random Name" style="width:60%">
-      </div>
-      <div class="w3-third">
-
-        <img src="img3.png" class="w3-round" alt="Random Name" style="width:60%">
-      </div>
-    </div>
 
 
     </div>
@@ -112,6 +91,8 @@ body {font-family: "Lato", sans-serif}
 
      </div>
   </div>
+    </div>
+
 
 
 
@@ -123,32 +104,6 @@ Read more at: https://www.w3schools.com/graphics/google_maps_basic.asp
 
 
 <script>
-// Automatic Slideshow - change image every 4 seconds
-var myIndex = 0;
-carousel();
-
-function carousel() {
-    var i;
-    var x = document.getElementsByClassName("mySlides");
-    for (i = 0; i < x.length; i++) {
-       x[i].style.display = "none";
-    }
-    myIndex++;
-    if (myIndex > x.length) {myIndex = 1}
-    x[myIndex-1].style.display = "block";
-    setTimeout(carousel, 4000);
-}
-
-// Used to toggle the menu on small screens when clicking on the menu button
-function myFunction() {
-    var x = document.getElementById("navDemo");
-    if (x.className.indexOf("w3-show") == -1) {
-        x.className += " w3-show";
-    } else {
-        x.className = x.className.replace(" w3-show", "");
-    }
-}
-
 // When the user clicks anywhere outside of the modal, close it
 var modal = document.getElementById('ticketModal');
 window.onclick = function(event) {
@@ -160,3 +115,4 @@ window.onclick = function(event) {
 
 </body>
 </html>
+{% endblock %}

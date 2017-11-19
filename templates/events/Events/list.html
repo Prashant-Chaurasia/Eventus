@@ -23,9 +23,9 @@
                     {% if event.cover_image %}
                         <img src="{{ event.cover_image.url }}" alt="Avatar" class="image">
                     {% endif %}
-                  <img src="{% static 'events/images/images.jpeg' %}" alt="Avatar" class="image">
                     <div class="overlay">
-                        <div class="short_desc_text">{{ event.description }}
+                        <div class="short_desc_text">
+                            <p align="justify" style="max-width: 500px; max-height:200px;overflow: hidden">{{ event.description }}<br> . . . </p>
                             <br>
                             <button class="btn_learn_more"><span>Learn More</span></button>
                         </div>
@@ -50,8 +50,35 @@
         <!--Past Events Page -->
         <div id="Past" class="tabcontent">
             <div>
-                <h3>Past</h3>
-                <p>Past Events will be displayed here.</p>
+                {% for event in past_events %}
+
+                <div class="card">
+                <div class="landscape">
+                    {% if event.cover_image %}
+                        <img src="{{ event.cover_image.url }}" alt="Avatar" class="image">
+                    {% endif %}
+                  <img src="{% static 'events/images/images.jpeg' %}" alt="Avatar" class="image">
+                    <div class="overlay">
+                        <div class="short_desc_text">
+                            <p>{{ event.description }}</p>
+                            <br>
+                            <button class="btn_learn_more"><span>Learn More</span></button>
+                        </div>
+                    </div>
+                </div>
+                  <div class="event_container">
+                      <h4><b><a href="{{ event.get_absolute_url }}">{{ event.title }}</a></b></h4>
+                    <p>{{ event.venue }}</p>
+
+                    <p class="date">
+                        Posted  {{ event.postdate }} by {{ event.author }}
+                    </p>
+                  </div>
+
+                </div>
+
+                {% endfor %}
+            {% include "events/Events/pagination.html" with page=events %}
             </div>
 
         </div>

@@ -1,7 +1,9 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+
 
 # Create your models here.
 
@@ -18,6 +20,7 @@ def event_rulebook_path(instance, filename):
     return 'user_{0}/{1}/{2}'.format(instance.author.id,'rulebook',filename)
 
 class Events(models.Model):
+    alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
     objects = models.Manager()
     posted = PostedManager()
     title = models.CharField(max_length=250)
@@ -31,15 +34,18 @@ class Events(models.Model):
     last_date = models.DateField()
     last_date_to_apply = models.DateField(null=True, blank=True)
     rulebook = models.FileField(null=True, blank=True,upload_to=event_rulebook_path)
-    website = models.TextField(null=True, blank=True)
-    venue = models.TextField()
-    college = models.CharField(max_length=500,null=True)
+    website = models.CharField(max_length=250,null=True, blank=True)
+    facebook_link = models.CharField(max_length=250,null=True,blank=True)
+    venue = models.CharField(validators=[alphanumeric],max_length=500)
+    college = models.CharField(validators=[alphanumeric],max_length=250,null=True)
     inter_event = models.BooleanField(default=False)
+    register = models.BooleanField(default=False)
+    no_of_tickets = models.IntegerField(default=0)
 
 
     def get_absolute_url(self):
         return reverse('events:event_detail',
-                       args=[self.postdate.year,
+                       args=[self.postdate.strftime('%Y'),
                              self.postdate.strftime('%m'),
                              self.postdate.strftime('%d'),
                              self.slug])

@@ -1,28 +1,21 @@
-{% extends 'base.html' %}
+{% extends 'base2.html' %}
+{% load material_form %}
 {% load staticfiles %}
 {% block content %}
-    <div class="container-fluid">
-        <div class="row " id="EventEditFirstTag">
+    <div class="container-fluid" style="text-align: center">
+        <div class="row ">
             <h1>
                 Add Your College
             </h1>
         </div>
         <hr>
-        <div class="row">
-            <div class="col-md-2">
-
-            </div>
-            <div class="col-md-8">
-                <form method="POST" class="post-form" enctype="multipart/form-data">{% csrf_token %}
-                    {{ form.as_p }}
-                    <button type="submit" class="save btn btn-default">Save</button>
-                </form>
-
-            </div>
-            <div class="col-md-2">
-
-            </div>
-        </div>
+         <div style="max-width: 50%;text-align: center;border: solid ;margin:0 auto;">
+        <form method="POST" enctype="multipart/form-data" style="padding: 10px;font-size: 30px;">
+            {% csrf_token %}
+            {% form form=form %}{% endform %}
+            <button type="submit" name="_submit" class="btn">Submit</button>
+        </form>
+    </div>
 
     </div>
 

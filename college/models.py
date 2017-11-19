@@ -1,11 +1,12 @@
+from django.core.validators import RegexValidator
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
-class PostedManager(models.Manager):
+class CollegeManager(models.Manager):
     def get_queryset(self):
-        return super(PostedManager,self).get_queryset()
+        return super(CollegeManager,self).get_queryset()
 
 def college_logo_path(instance, filename):
     # file will be uploaded to MEDIA_ROOT/user_<id>/<filename>
@@ -16,9 +17,10 @@ class College(models.Model):
         ('GN', 'Gandhinagar'),
         ('ADI', 'Ahmedabad'),
     )
+    alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
     objects = models.Manager()
-    posted = PostedManager()
+    posted = CollegeManager()
     name = models.CharField(max_length=250)
     slug = models.SlugField(max_length=250,unique_for_date='postdate')
     author = models.ForeignKey(User,related_name='college_posts')
@@ -27,7 +29,7 @@ class College(models.Model):
     scc_mail_id = models.EmailField()
     description = models.TextField(null=True,blank=True)
     website = models.TextField(null=True, blank=True)
-    address = models.TextField()
+    address = models.TextField(validators=[alphanumeric])
     city = models.CharField(max_length=150, default="Gandhinagar", choices=CITY_CHOICES)
 
     def get_absolute_url(self):

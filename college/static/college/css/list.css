@@ -32,6 +32,7 @@ margin :70px 55px 5px 55px;
     max-width: 300px;
     max-height: 350px;
     box-shadow: 0 4px 8px 0 rgba(7,7,7,0.6);
+    border-radius: inherit ;
     transition: 0.3s;
     text-align: center;
     font-style: italic ;

@@ -48,6 +48,9 @@ ALLOWED_HOSTS = [keys.ALLOWED_HOST]
 # Application definition
 
 INSTALLED_APPS = [
+    'material',
+    'material.frontend',
+    'material.admin',
     'account',
     'events',
     'college',

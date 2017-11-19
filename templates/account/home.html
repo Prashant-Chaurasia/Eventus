@@ -1,60 +1,120 @@
-{% extends 'base.html' %}
 {% load static %}
-{% block content %}
-    <div class="jumbotron">
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>EvenTUs-Events Around You</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{% static "account/css/home.css" %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Raleway:400, 600" rel="stylesheet">
+  </head>
+
+    <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+
+        <nav class="navbar navbar-default navbar-fixed-top">
           <div class="container">
-              <div class="main">
-                  <h1>EventUs</h1>
-                  <h2>Looking for any college event near you , we are providing you perfect getaway.</h2>
-              </div>
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              <a class="navbar-brand" href="/"><img src="{% static 'account/images/eventus.png' %}" alt= "Logo" style="width:60px;height:60px;border:0;"></a>
+
+            </div>
+
+            <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li><a href="{% url 'events:events_list' %}">EVENTS</a></li>
+                <li><a href="{% url 'college:college_list' %}">COLLEGE</a></li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                {% if user.is_authenticated  and user.is_active %}
+
+                    <li class="">
+
+                        <a href="{% url 'auth_logout' %}">
+                            <button class="btn btn-main">LOGOUT</button>
+                        </a>
+
+                    </li>
+
+                {% else %}
+                <li><a href="#about">ABOUT</a></li>
+                <li><a href="#services">SERVICES</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+
+                <li class="">
+
+                    <a href="{% url 'auth_login' %}">
+                        <button type="button" class="btn btn-main">Sign In</button>
+                    </a>
+                </li>
+
+                <li><a href="{% url 'registration_register' %}"><button type="button" class="btn btn-main">Sign Up</button></a></li>
+
+                {% endif %}
+                 </ul>
+            </div>
           </div>
-      </div>
+        </nav>
+
+
+
+    <div class="image">
+       <h1 class="heading">EvenTUs</h1>
+       <p style="text-transform: uppercase">One place to events near you</p>
+    </div>
         <!-- Container (About Section) -->
 
-      <div id ="about" class="container-fluid">
-
-          <div class="row">
-              <div class="col-sm-8">
-                  <h2>About Us</h2>
-                  <h4>Lorem ipsum..</h4>
-                  <p>Lorem ipsum..</p>
+      <div id ="about" class="container-fluid text-center">
+          <h2><strong>ABOUT US</strong></h2>
+              <div class="col-sm-6" style="max-width: 900px; margin: 0 auto;padding: 20px">
+                <p align="justify">Eventus will be an association of all the college campus festivals in India. This includes
+                both Inter or Intra level college fests. Eventus is a solution for accessing even minuscule
+                of information about the fests. Our main motto is to connect students from campuses all
+                over India by making them aware of Cultural, Technical, Management Fests, Workshops,
+                Seminars organized by every college in Gandhinagar and Ahmedabad. Eventus is a
+                platform which provides details about the fests, fests by type, fests near you and service
+                of registration to attend or participate in an event..</p>
               </div>
-              <div class="col-sm-4">
-                  <span class="glyphicon glyphicon-signal logo"></span>
-              </div>
+          <div class="col-sm-6">
+              {% comment %}<h3><strong>OUR MOTIVE</strong></h3>{% endcomment %}
+          <div style="max-width: 900px; margin: 0 auto;padding: 20px">
+          <p align="justify"><strong>Mission:</strong> To make students aware of the events in other colleges..To facilitate more and more participation of students
+              in extra-curricular events and give them a platform wherein they can know
+              when an what kind of events is happening around them..
+              <br>
+              <br>
+          <strong>Vision:</strong> To make EvenTUs as a platform through which student community gets benefits of getting to know and registering in an event event..</p>
           </div>
-      </div>
-
-      <div class="container-fluid bg-grey">
-
-          <div class="row">
-            <div class="col-sm-4">
-              <span class="glyphicon glyphicon-globe logo"></span>
-            </div>
-            <div class="col-sm-8">
-              <h2>Our Motive</h2>
-              <h4><strong>MISSION:</strong> Our mission lorem ipsum..</h4>
-                <p><strong>VISION:</strong> Our vision Lorem ipsum..</p>
-            </div>
           </div>
+
       </div>
 
         <!-- Container (Our Services) -->
 
-      <div id= "services" class="container-fluid text-center">
-          <h2>OUR SERVICES</h2>
-          <h4>What we offer</h4>
+      <div id= "services" class="container-fluid text-center bg-grey">
+          <h2><strong>OUR SERVICES</strong></h2>
+          <h4 style="padding-top: 10px">What we offer</h4>
           <br>
           <div class="row">
             <div class="col-sm-6">
-              <span class="glyphicon glyphicon-off logo-small"></span>
+              <span class="glyphicon glyphicon-eye-open logo-small"></span>
               <h4>EXPOSURE</h4>
-              <p>Lorem ipsum dolor sit amet..</p>
+              <p align="justify" style="padding:20px 60px 30px 60px;">Participating in the events gives you enough experience and thus adds to your credibility and confidence ..</p>
             </div>
             <div class="col-sm-6">
-              <span class="glyphicon glyphicon-heart logo-small"></span>
-              <h4>LOVE</h4>
-              <p>Lorem ipsum dolor sit amet..</p>
+              <span class="glyphicon glyphicon-bell logo-small"></span>
+              <h4>NOTIFICATIONS</h4>
+              <p align="justify" style="padding:20px 60px 30px 60px;">You will recieve notifications about events near you and also about the events you are registered in...</p>
             </div>
           </div>
 
@@ -63,14 +123,14 @@
 
           <div class="row">
             <div class="col-sm-6">
-              <span class="glyphicon glyphicon-lock logo-small"></span>
+              <span class="glyphicon glyphicon-sunglasses logo-small"></span>
               <h4>EVENTS PARTICIPATION</h4>
-              <p>Lorem ipsum dolor sit amet..</p>
+              <p align="justify" style="padding:20px 60px 30px 60px;">The platform lets you register in events taking place in your college or outside your college, thus saving your time..</p>
             </div>
             <div class="col-sm-6">
-              <span class="glyphicon glyphicon-leaf logo-small"></span>
-              <h4>INFORMATION</h4>
-              <p>Lorem ipsum dolor sit amet..</p>
+              <span class="glyphicon glyphicon-gift logo-small"></span>
+              <h4>CASHBACK AND GIFTS</h4>
+              <p align="justify" style="padding:20px 60px 30px 60px;">Get awesome surprises in the form of gifts and cashbacks when you register in an event through our site ..</p>
             </div>
           </div>
       </div>
@@ -78,8 +138,8 @@
 
         <!-- Container (Customer Reviews) -->
 
-      <div class="container-fluid text-center bg-grey">
-       <h2>WHAT OUR CUSTOMERS SAY</h2>
+      <div class="container-fluid text-center">
+          <h2><strong>WHAT OUR CUSTOMERS SAY</strong></h2>
           <br>
         <div id="myCarousel" class="carousel slide text-center" data-ride="carousel">
           <!-- Indicators -->
@@ -116,14 +176,16 @@
 
         <!-- Container (Contact) -->
 
-       <div id="contact" class="container-fluid">
-          <h2 class="text-center">CONTACT</h2>
+       <div id="contact" class="container-fluid bg-grey">
+          <h2 class="text-center"><strong>CONTACT</strong></h2>
+           <h4 style="text-align: center;margin: 0 auto">We'd love your feedback!</h4>
+           <br>
           <div class="row">
             <div class="col-sm-5">
               <p>Contact us and we'll get back to you within 24 hours.</p>
               <p><span class="glyphicon glyphicon-map-marker"></span> Gandhinagar, India</p>
               <p><span class="glyphicon glyphicon-phone"></span> +91 9601006025</p>
-              <p><span class="glyphicon glyphicon-envelope"></span> eventus@gmail.com</p>
+              <p><span class="glyphicon glyphicon-envelope"></span> Eventusactivation@gmail.com</p>
             </div>
             <div class="col-sm-7">
               <div class="row">
@@ -144,10 +206,32 @@
           </div>
         </div>
 
-{% endblock %}
+    <div class="footer">
+        <div class="container" style="margin: 0 auto;text-align: center">
+          <p>&copy; EventUs 2017</p>
+          <div class="w3-xlarge w3-section">
+            <a href="https://www.facebook.com"><i class="fa fa-facebook-official w3-hover-opacity"></i></a>
+            <a href="https://www.instagram.com"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+              <a href="https://twitter.com"><i class="fa fa-twitter w3-hover-opacity"></i></a>
+              <a href="https://www.linkedin.com"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+          </div>
+        </div>
+    </div>
 
-
-   <script>
+    <script>
+        $(document).ready(function() {
+        // Transition effect for navbar
+        $(window).scroll(function() {
+          // checks if window is scrolled more than 500px, adds/removes solid class
+          if($(this).scrollTop() > 450) {
+              $('.navbar').addClass('solid');
+          } else {
+              $('.navbar').removeClass('solid');
+          }
+        });
+        });
+    </script>
+    <script>
         $(document).ready(function(){
           // Add smooth scrolling to all links in navbar + footer link
           $(".navbar a, footer a[href='#myPage']").on('click', function(event) {
@@ -182,7 +266,7 @@
             });
           });
         })
-        </script>
+    </script>
 
     </body>
 </html>
