@@ -1,0 +1,32 @@
+{% extends 'base2.html' %}
+{% block content %}
+{% load material_form %}
+ {% load static %}
+<!-- Material form is just a materialize thing for django forms -->
+{% include 'material/includes/material_css.html' %}
+      <script src="{% static 'material/js/jquery.js' %}"></script>
+     {% include 'material/includes/material_js.html' %}
+
+<div class="col s12 m8 offset-m2" style="margin-top: 100px">
+      <div class="card">
+        <div class="card-content">
+        <h2 class="flow-text">Update your information</h2>
+          <form action="." method="POST" class="padding" enctype="multipart/form-data">
+            {% csrf_token %} {{ noodle_form.as_p }}
+            <div class="divider"></div>
+                {{ formset.management_form }}
+                {% for form in formset %}
+                    {{ form.id }}
+                    <label>Name</label>{{ form.Name }}
+                    <label>Education</label>{{ form.Education }}
+                    <label>Area of Interest</label>{{ form.Area }}
+                    <label>About</label>{{ form.About }}
+                {% endfor %}
+            <button type="submit" class="btn-floating btn-large waves-light waves-effect"><i class="large material-icons">done</i></button>
+            <a href="#" onclick="window.history.back(); return false;" title="Cancel" class="btn-floating waves-effect waves-light red"><i class="material-icons">history</i></a>
+
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -175,6 +175,15 @@
       </div>
 
         <!-- Container (Contact) -->
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <script>alert("Thanks for your message we will contact you soon.");</script>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+
 
        <div id="contact" class="container-fluid bg-grey">
           <h2 class="text-center"><strong>CONTACT</strong></h2>
@@ -188,20 +197,23 @@
               <p><span class="glyphicon glyphicon-envelope"></span> Eventusactivation@gmail.com</p>
             </div>
             <div class="col-sm-7">
+                <form action="{% url 'home:contactus' %}" method="post">
+                    {% csrf_token %}
               <div class="row">
                 <div class="col-sm-6 form-group">
-                  <input class="form-control" id="name" name="name" placeholder="Name" type="text" required>
+                  {{ form.Name }}
                 </div>
                 <div class="col-sm-6 form-group">
-                  <input class="form-control" id="email" name="email" placeholder="Email" type="email" required>
+                  {{ form.Email }}
                 </div>
               </div>
-              <textarea class="form-control" id="comments" name="comments" placeholder="Comment" rows="5"></textarea><br>
+              {{ form.Comment }}
               <div class="row">
                 <div class="col-sm-12 form-group">
                   <button class="btn btn-default pull-right" type="submit">Send</button>
                 </div>
               </div>
+                </form>
             </div>
           </div>
         </div>

@@ -38,13 +38,28 @@
               <ul class="nav navbar-nav navbar-right">
 
                 {% if user.is_authenticated  and user.is_active %}
+                    {% ifequal user.groups.all.0.name "StudentsOnly" %}
+                        <li class="">
 
-                    <li class="">
-                        <a href="{% url 'auth_logout' %}">
-                            <button class="btn btn-main">LOGOUT</button>
-                        </a>
-
-                    </li>
+                    <a href="{% url 'suggest:suggestEvent' %}">
+                        <button type="button" class="btn btn-main">+ Suggest an Event</button>
+                    </a>
+                </li>
+                    {% endifequal %}
+                    <link href="{% static "account/css/circle_button.css" %}" rel="stylesheet">
+                    <div class="dropdown">
+                        <button type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-user"></i></button>
+                            <div class="dropdown-content">
+                                <a href="#">Update Profile</a>
+                                {% ifequal user.groups.all.0.name "FacultyOnly" %}
+                                    <a href="#">Add Clubs</a>
+                                    <a href="#">Add Events</a>
+                                    <a href="#">Ban User</a>
+                                {% endifequal %}
+                                <a href="{% url 'auth_password_change' %}">Change Password</a>
+                                <a href="{% url 'auth_logout' %}">Logout</a>
+                            </div>
+                    </div>
                 {% else %}
 
                 <li class="">

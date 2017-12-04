@@ -20,7 +20,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from account.regbackend2 import StudentRegistrationView
 from account import views
-
+from userProfile.views import edit_user
 
 urlpatterns = [
 
@@ -30,7 +30,9 @@ urlpatterns = [
     url(r'',include('events.urls',namespace='events',app_name='events')),
     url(r'',include('college.urls',namespace='college',app_name='college')),
     url(r'^accounts/', include('registration.backends.default.urls')),
-    url(r'^$',include('homepage.urls')),
+    url(r'^',include('homepage.urls')),
+    url(r'^Update/', edit_user, name='update'),
+    url(r'^', include('suggestEvent.urls'))
 ]
 
 
