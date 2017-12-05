@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
+
+
 # Create your models here.
-
-
 class CollegeCode(models.Model):
 
     Code = models.CharField(max_length=50,primary_key= True)
@@ -11,6 +11,7 @@ class CollegeCode(models.Model):
 
     def __str__(self):
         return self.Name
+
 
 class Faculty(models.Model):
 
@@ -25,6 +26,7 @@ class Faculty(models.Model):
 
 
 class Students(models.Model):
+
     Name = models.CharField(max_length=50)
     user = models.OneToOneField(User)
     RollNo = models.CharField(max_length=50)
@@ -33,9 +35,11 @@ class Students(models.Model):
     Batch = models.CharField(max_length=50, blank=True)
     Year = models.CharField(max_length=50, blank=True)
     About = models.CharField(max_length=200, blank=True)
+    is_secratory = models.BooleanField(default=False)
 
     def __str__(self):
         return self.Name
+
 
 '''
 def create_profile(sender, **kwargs):

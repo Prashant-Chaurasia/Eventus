@@ -4,20 +4,38 @@ from .models import College
 from .forms import CollegeForm
 from django.shortcuts import redirect
 from django.utils import timezone
+from account.views import is_secretory
 # Create your views here.
+from django.contrib.auth.decorators import login_required
 
+
+
+@login_required(login_url='/accounts/login')
 def College_list(request):
     college = College.posted.all()
-    return render(request,'college/College/list.html',{'colleges':college})
+    sec = False
+    if is_secretory(request.user):
+        sec = True
+    return render(request,'college/College/list.html',{'colleges':college, 'sec': sec})
 
+
+@login_required(login_url='/accounts/login')
 def College_detail(request, year, month, day, event):
     event = get_object_or_404(College, slug=event,
                             postdate__year=year,
                             postdate__month=month,
                             postdate__day=day)
-    return render(request,'events/Events/detail.html',{'event':event})
+    sec = False
+    if is_secretory(request.user):
+        sec = True
 
+    return render(request,'events/Events/detail.html',{'event': event, 'sec':sec})
+
+@login_required(login_url='/accounts/login')
 def Add_College(request):
+    sec = False
+    if is_secretory(request.user):
+        sec = True
     if request.method == "POST":
         form = CollegeForm(request.POST,request.FILES)
         if form.is_valid():
@@ -30,4 +48,5 @@ def Add_College(request):
 
     else:
         form = CollegeForm()
-    return render(request, 'college/College/add_college.html', {'form': form})
+
+    return render(request, 'college/College/add_college.html', {'form': form, 'sec': sec})

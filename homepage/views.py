@@ -13,7 +13,6 @@ def home(request):
     return render(request, 'account/home.html', {'form':form})
 
 
-
 def contact_new(request):
     if request.method == "POST":
         form = ContactForm(request.POST)
@@ -24,4 +23,4 @@ def contact_new(request):
             return redirect('home:homepage')
     else:
         form = ContactForm()
-        return render(request, 'account/home.html', {'form':form})
+    return render(request, 'account/home.html', {'form':form})
