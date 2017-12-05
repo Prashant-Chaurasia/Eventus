@@ -50,11 +50,11 @@ ALLOWED_HOSTS = [keys.ALLOWED_HOST]
 INSTALLED_APPS = [
     'material',
     'material.frontend',
-    'material.admin',
     'account',
     'suggestEvent.apps.SuggesteventConfig',
     'events',
     'college',
+    'club',
     'registration',
     'homepage.apps.HomepageConfig',
     'django.contrib.admin',

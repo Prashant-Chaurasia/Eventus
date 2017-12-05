@@ -9,30 +9,22 @@
     <div class="clouds">
     <strong><h1 style="text-align: center">Colleges</h1></strong>
 
-        {% comment %}<div class="row">
-        {% for college in colleges %}
-          <div class="column">
-            <div class="college_content">
-                <div class="college_name">
-                    <strong><p>{{ college.name }}</p></strong>
-                    </div>
-            <hr style="border-color:#303030 ;height: 5px">
-                <div class="college_logo">
-                    {% if college.logo %}
-                    <img src="{{ college.logo.url }}">
-                  {% endif %}
-                </div>
-            </div>
-          </div>
-        {% endfor %}
-        </div>{% endcomment %}
-
-
+    {% if colleges %}
         <div class="row">
 
             {% for college in colleges %}
-            <div class="col-md-3">
-                 <div class="college_content">
+
+                <div class="col-md-3">
+                    <div class="w3-card-4" style="width: 100%">
+                        <div class="w3-container w3-center"><strong>
+                               <h3>{{ college.name }}</h3></strong>
+                        </div>
+                    {% if college.logo %}
+                        <img src="{{ college.logo.url }}" style="width: 100%">
+                    {% endif %}
+                    </div>
+                </div>
+                {% comment %} <div class="college_content">
                 <div class="college_name">
                     <strong><p>{{ college.name }}</p></strong>
                     </div>
@@ -40,21 +32,18 @@
                 <div class="college_logo">
                     {% if college.logo %}
                     <img src="{{ college.logo.url }}">
-                  {% endif %}
-                </div>
-            </div>
-            </div>
+                  {% endif %}{% endcomment %}
 
                 <!-- if last column in row -->
                 {% if forloop.counter|divisibleby:"4" and not forloop.last %}
                 </div><div class="row">
                 {% endif %}
-
             {% endfor %}
-
+            </div>
+            {% else %}
+             <h3 style="text-align: center">No College Is Registered</h3>
+            {% endif %}
         </div>
-
-       </div>
     </body>
 </html>
 {% endblock %}

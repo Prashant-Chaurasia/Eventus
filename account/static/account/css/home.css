@@ -20,7 +20,7 @@
 }
 
 .navbar {
-    height: 60px;
+    min-height: 60px;
     margin-bottom: 0;
     background-color: transparent/*#2C3539*/;
     z-index: 100;
@@ -43,12 +43,12 @@
 
 .navbar-nav li.active a {
     color: #4682b4 !important;
-    background-color: #fff !important;
+    background-color: #2C3539 !important;
 }
 
 .navbar-default .navbar-toggle {
     border-color: transparent;
-    color: #fff !important;
+    color: #2C3539 !important;
 }
 
 

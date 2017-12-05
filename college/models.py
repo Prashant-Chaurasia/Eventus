@@ -3,7 +3,12 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from material import Layout, Row, Column, Fieldset, Span2, Span3, Span5, Span6, Span10
 
+CITY_CHOICES = (
+        ('GN', 'Gandhinagar'),
+        ('ADI', 'Ahmedabad'),
+    )
 class CollegeManager(models.Manager):
     def get_queryset(self):
         return super(CollegeManager,self).get_queryset()
@@ -13,10 +18,6 @@ def college_logo_path(instance, filename):
     return 'user_{0}/{1}/{2}/{3}'.format(instance.author.id,instance.name,'logo',filename)
 
 class College(models.Model):
-    CITY_CHOICES = (
-        ('GN', 'Gandhinagar'),
-        ('ADI', 'Ahmedabad'),
-    )
     alphanumeric = RegexValidator(r'^[0-9a-zA-Z]*$', 'Only alphanumeric characters are allowed.')
 
     objects = models.Manager()
@@ -27,10 +28,10 @@ class College(models.Model):
     postdate = models.DateTimeField(default=timezone.now)
     logo = models.FileField(null=True, blank=True,upload_to=college_logo_path)
     scc_mail_id = models.EmailField()
-    description = models.TextField(null=True,blank=True)
+    description = models.TextField(max_length=500,null=True,blank=True)
     website = models.TextField(null=True, blank=True)
     address = models.TextField(validators=[alphanumeric])
-    city = models.CharField(max_length=150, default="Gandhinagar", choices=CITY_CHOICES)
+    city = models.CharField(max_length=60 ,choices=CITY_CHOICES,default='Gandhinagar')
 
     def get_absolute_url(self):
         return reverse('college:college_details',

@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load material_form %}
+{% load staticfiles %}
+{% block content %}
+
+<html>
+<head>
+    <title>Student and organizer</title>
+    <link rel="stylesheet" href="{% static 'club/css/club.css' %}" type="text/css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body>
+
+    <div class="clouds">
+    <strong><h1 style="text-align: center">Clubs In Your Colleges</h1></strong>
+     <div class="text-center">
+            <section class="FAB">
+                <div class="FAB__action-button">
+                    <a style="background: transparent;border: transparent;" href=""data-toggle="modal" data-target="#elegantModalForm"><i class="action-button__icon material-icons">add</i></a>
+                    <p class="action-button__text--hide">Create Club</p>
+
+                </div>
+            </section>
+        </div>
+        {% if clubs %}
+        <div class="row">
+            {% for club in clubs %}
+            <div class="col-md-6" >
+                 <div class="w3-card-4" style="width: 100%">
+                    {% if club.club_image %}
+                        <img src="{{ club.club_image.url }}" style="width: 100%">
+                     {% endif %}
+                   <div class="w3-container w3-center">
+                       <div class="w3-container w3-center"><strong>
+                           <h3>{{ club.name }}</h3></strong>
+                       </div>
+                       <p><b>Secretary</b></p>
+                    {% if club.secretary.email %}
+                        <i><p>{{ club.secretary.email}}</p></i>
+                     {% endif %}
+                    </div>
+                </div>
+            </div>
+
+                <!-- if last column in row -->
+            {% if forloop.counter|divisibleby:"2" and not forloop.last %}
+            </div><div class="row" style="margin-top: 24px  ">
+            {% endif %}
+
+        {% endfor %}
+        </div>
+        {% else %}
+            <h3 style="text-align: center">Registered Faculty Of Your College Has Not Created Any Clubs</h3>
+        {% endif %}
+
+
+
+    <!-- Create Club Form -->
+    <div class="modal fade" id="elegantModalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <!--Content-->
+
+                <div class="modal-content form-elegant">
+
+                    <!--Header-->
+                    <div class="modal-header text-center">
+                        <h3 class="modal-title w-100 dark-grey-text font-bold my-3" id="myModalLabel"><strong>Add A Club</strong></h3>
+                        <hr>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+
+                    </div>
+                    <!--Body-->
+                    <div class="modal-body">
+                        <!--Body-->
+                        <form method="post" enctype="multipart/form-data" action="." style="text-align:center;align-items:center;">
+                        {% csrf_token %}
+                            {{ form.as_p }}
+                            <button class="btn btn-primary" style="width:100%">Create Club</button>
+                        </form>
+                </div>
+            </div>
+        </div>
+            </div>
+        <!-- Modal -->
+
+
+    </div>
+
+</body>
+</html>
+
+
+{% endblock %}

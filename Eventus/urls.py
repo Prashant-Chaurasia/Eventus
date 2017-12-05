@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^home/',views.home, name = 'home'),
     url(r'',include('events.urls',namespace='events',app_name='events')),
     url(r'',include('college.urls',namespace='college',app_name='college')),
+    url(r'',include('club.urls',namespace='club',app_name='club')),
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^',include('homepage.urls')),
     url(r'^Update/', edit_user, name='update'),
