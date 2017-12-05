@@ -32,7 +32,8 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.default.urls')),
     url(r'^',include('homepage.urls')),
     url(r'^Update/', edit_user, name='update'),
-    url(r'^', include('suggestEvent.urls'))
+    url(r'^', include('suggestEvent.urls')),
+    url(r'^ban/', views.ban_user, name='ban'),
 ]
 
 

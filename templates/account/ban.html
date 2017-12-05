@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block content %}
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/css/bootstrap-select.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/bootstrap-select.min.js"></script>
+
+<!-- (Optional) Latest compiled and minified JavaScript translation files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.4/js/i18n/defaults-*.min.js"></script>
+
+<div class="container" style="margin-top: 65px">
+    <div class="col-sm-6 col-sm-offset-0">
+        <p class="alert alert-warning"> Be Careful user will be permanantly banned</p>
+
+    <br>
+    <div>
+        <form method="post" action="{% url 'ban' %}">
+            {% csrf_token %}
+                <select class="selectpicker show-tick" name="email">
+                    {% for lol in users.all %}
+                        {% if lol.user.is_active == True  %}
+                            <option value="{{ lol.user.email }}">{{ lol.user.email }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+                <br>
+                <div>
+                    <br>
+                <button type="submit" class="button button-block"/>Ban</button>
+                </div>
+        </form>
+    </div>
+    </div>
+</div>
+{% endblock %}

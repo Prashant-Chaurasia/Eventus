@@ -60,7 +60,7 @@ def edit_user(request):
                         formset.save()
                         return HttpResponseRedirect('/')
 
-            return render(request, "userProfile/fun.html", {
+            return render(request, "userProfile/student.html", {
                 "noodle": user.pk,
                 "noodle_form": user_form,
                 "formset": formset,
