@@ -187,6 +187,15 @@
       </div>
 
         <!-- Container (Contact) -->
+        {% if messages %}
+            <ul class="messages">
+            {% for message in messages %}
+                <script>alert("Thanks for your message we will contact you soon.");</script>
+            {% endfor %}
+            </ul>
+        {% endif %}
+
+
 
 
        <div class="container-fluid bg-grey">
