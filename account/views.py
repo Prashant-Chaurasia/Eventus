@@ -8,7 +8,6 @@ from django.http import Http404
 from django.contrib.auth.decorators import login_required
 
 
-@login_required(login_url='/accounts/login')
 def home(request):
     return redirect('events:events_list')
 
@@ -24,16 +23,16 @@ def is_faculty_or_secretory(user):
     else:
         secretory = Students.objects.get(user=user)
         if secretory.is_secratory:
-            return True
-        else:
             return False
+        else:
+            return True
 
-def is_secretory(user):
+def is_secretory(User):
 
-    if user.groups.filter(name='FacultyOnly').exists():
+    if User.groups.filter(name='FacultyOnly').exists():
         return False
     else:
-        secretory = Students.objects.get(user=user)
+        secretory = Students.objects.get(user=User)
         if secretory.is_secratory:
             return True
         else:
@@ -51,7 +50,6 @@ def ban_user(request):
             college = Faculty.objects.get(user=request.user)
         else:
             college = Students.objects.get(user=request.user)
-
         stud = Students.objects.filter(Code=college.Code)
 
 

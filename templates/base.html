@@ -49,14 +49,16 @@
                     <link href="{% static "account/css/circle_button.css" %}" rel="stylesheet">
                     <div class="dropdown">
                         <button type="button" class="btn btn-primary btn-circle btn-lg"><i class="glyphicon glyphicon-user"></i></button>
-                            <div class="dropdown-content">
+                            <div class="dropdown-content" style="margin-right: 20px">
                                 <a href="{% url 'update' %}">Update Profile</a>
                                 {% ifequal user.groups.all.0.name "FacultyOnly" %}
-                                    <a href="#">Add Clubs</a>
-                                    <a href="#">Add Events</a>
+                                    <a href="{% url 'club:add_club' %}">Add Clubs</a>
+                                    <a href="{% url 'events:create_event' %}">Add Events</a>
+                                    <a href="{% url 'college:add_college' %}">Add College</a>
                                     <a href="{% url 'ban' %}">Ban User</a>
                                 {% endifequal %}
                                 {% if sec == True %}
+                                    <a href="{% url 'events:create_event' %}">Add Events</a>
                                     <a href="{% url 'ban' %}">Ban a User</a>
                                 {% endif %}
                                 <a href="{% url 'auth_password_change' %}">Change Password</a>

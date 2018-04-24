@@ -8,13 +8,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% include 'material/includes/material_css.html' %}
-    <script src="{% static 'material/js/jquery.js' %}"></script>
-    {% include 'material/includes/material_js.html' %}
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{% static "account/css/base.css" %}" rel="stylesheet">
+
+    <script src="{% static 'material/js/jquery.js' %}"></script>
+    {% include 'material/includes/material_js.html' %}
     <link href="https://fonts.googleapis.com/css?family=Raleway:400, 600" rel="stylesheet">
   </head>
 
@@ -55,11 +56,13 @@
                             <div class="dropdown-content">
                                 <a href="{% url 'update' %}">Update Profile</a>
                                 {% ifequal user.groups.all.0.name "FacultyOnly" %}
-                                    <a href="#">Add Clubs</a>
-                                    <a href="#">Add Events</a>
+                                    <a href="{% url 'club:add_club' %}">Add Clubs</a>
+                                    <a href="{% url 'events:create_event' %}">Add Events</a>
+                                    <a href="{% url 'college:add_college' %}">Add College</a>
                                     <a href="{% url 'ban' %}">Ban User</a>
                                 {% endifequal %}
                                 {% if sec == True %}
+                                    <a href="{% url 'events:create_event' %}">Add Events</a>
                                     <a href="{% url 'ban' %}">Ban a User</a>
                                 {% endif %}
                                 <a href="{% url 'auth_password_change' %}">Change Password</a>

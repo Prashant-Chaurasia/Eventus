@@ -1,0 +1,63 @@
+.box{
+	padding-left: 5%;
+	padding-right: 10%;
+	background-color: #d3d3d3 ;
+	padding-bottom: 5%;
+	box-shadow: 5px 5px 5px #888888;
+
+}
+.my-left-pad{
+	padding-left: 90%;
+	padding-top:5%;
+}
+.reg-box{
+		padding-left: 10%;
+		padding-right: 10%;
+		background-color: #d3d3d3 ;
+		padding-bottom: 5%;
+		box-shadow: 5px 5px 5px #888888;
+
+		width: 100%;
+
+}
+.fb-button{
+
+	cursor: pointer;
+}
+
+
+.fb-button{
+
+	float:left;
+		width: 2%;
+	height: 2%;
+}
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+
+.button2 {
+	width: 25%;
+
+}
+.college_name{
+
+
+}
+p.serif {
+    font-family: "Times New Roman", Times, serif;
+}
+
+p.sansserif {
+    font-family: Arial, Helvetica, sans-serif;
+}

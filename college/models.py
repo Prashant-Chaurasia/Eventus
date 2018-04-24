@@ -34,11 +34,10 @@ class College(models.Model):
     city = models.CharField(max_length=60 ,choices=CITY_CHOICES,default='Gandhinagar')
 
     def get_absolute_url(self):
-        return reverse('college:college_details',
+        return reverse('college:college_detail',
                        args=[self.postdate.year,
                              self.postdate.strftime('%m'),
-                             self.postdate.strftime('%d'),
-                             self.slug])
+                             self.slug,])
 
     class Meta:
         ordering = ('-postdate',)

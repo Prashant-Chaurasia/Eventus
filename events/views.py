@@ -10,11 +10,8 @@ from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 
-@login_required(login_url='/accounts/login')
 def events_list(request):
-    sec = False
-    if is_secretory(request.user):
-        sec = True
+
     event_list = Events.posted.all()
     past_event_list = event_list.filter(last_date__lte=timezone.now())
     paginator = Paginator(event_list, 3)  # 3 posts in each page
@@ -25,26 +22,20 @@ def events_list(request):
         events = paginator.page(1)
     except EmptyPage:
         events = paginator.page(paginator.num_pages)
-    return render(request,'events/Events/list.html',{'page':page,'events':events,'past_events':past_event_list, 'sec': sec})
+    return render(request,'events/Events/list.html',{'page':page,'events':events,'past_events':past_event_list})
 
 
 @login_required(login_url='/accounts/login')
 def event_detail(request, year, month, day, event):
-    sec = False
-    if is_secretory(request.user):
-        sec = True
     event = get_object_or_404(Events, slug=event,
                             postdate__year=year,
                             postdate__month=month,
                             postdate__day=day)
-    return render(request,'events/Events/detail.html',{'event':event, 'sec': sec})
+    return render(request,'events/Events/detail.html',{'event':event})
 
 
 @login_required(login_url='/accounts/login')
 def create_event(request):
-    sec = False
-    if is_secretory(request.user):
-        sec = True
     if request.method == "POST":
         form = EventForm(request.POST,request.FILES)
         if form.is_valid():
@@ -57,4 +48,4 @@ def create_event(request):
 
     else:
         form = EventForm()
-    return render(request, 'events/Events/create_event.html', {'form': form, 'sec': sec})
+    return render(request, 'events/Events/create_event.html', {'form': form})
